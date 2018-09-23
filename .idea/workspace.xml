@@ -34,7 +34,7 @@
           <entry key="erb" value="2" />
           <entry key="js" value="2" />
           <entry key="lock" value="1" />
-          <entry key="rb" value="24" />
+          <entry key="rb" value="25" />
           <entry key="scss" value="4" />
           <entry key="yml" value="5" />
         </counts>
@@ -45,7 +45,7 @@
           <entry key="JavaScript" value="2" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="RHTML" value="2" />
-          <entry key="Ruby" value="27" />
+          <entry key="Ruby" value="28" />
           <entry key="SCSS" value="4" />
           <entry key="YAML" value="5" />
         </counts>
@@ -104,6 +104,7 @@
         <option value="$PROJECT_DIR$/app/assets/javascripts/application.js" />
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/config/database.yml" />
+        <option value="$PROJECT_DIR$/config/environments/production.rb" />
       </list>
     </option>
   </component>
@@ -118,7 +119,7 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="73" />
     <option name="y" value="47" />
     <option name="width" value="1283" />
@@ -137,6 +138,17 @@
             <path>
               <item name="x1" type="b2602c69:ProjectViewProjectNode" />
               <item name="x1" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="x1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="x1" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="x1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="x1" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+              <item name="environments" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -278,15 +290,15 @@
       <workItem from="1537642997623" duration="605000" />
       <workItem from="1537644245319" duration="599000" />
       <workItem from="1537684750093" duration="3226000" />
-      <workItem from="1537697424650" duration="2010000" />
+      <workItem from="1537697424650" duration="2372000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6440000" />
+    <option name="totallyTimeSpent" value="6802000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="63" y="25" width="1303" height="743" extended-state="6" />
+    <frame x="63" y="25" width="1303" height="743" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19570406" />
@@ -445,6 +457,9 @@
           <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/environments/production.rb">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Gemfile">
       <provider selected="true" editor-type-id="text-editor">
