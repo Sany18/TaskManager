@@ -1,0 +1,40 @@
+<div class="w3-container w3-teal">
+  <h2>Вход</h2>
+</div>
+
+<div class="w3-container w3-teal">
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+</div>
+
+<div class="w3-container w3-margin-top" style="width:500px">
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="field">
+      <%= f.label :email %><br/>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w3-input w3-border w3-round-large" %>
+    </div>
+
+    <div class="field">
+      <%= f.label "Пароль" %><br/>
+      <%= f.password_field :password, autocomplete: "current-password", class: "w3-input w3-border w3-round-large" %>
+    </div>
+
+    <% if devise_mapping.rememberable? -%>
+      <div class="field w3-margin-top w3-margin-bottom">
+        <%= f.check_box :remember_me%>
+        <%= f.label "Запомнить меня" %>
+      </div>
+    <% end -%>
+
+    <input class="w3-button w3-teal" type="submit" value="Зайти">
+
+    <div class="w3-button w3-teal">
+      <%= link_to "Зарегистрироваться", new_registration_path(resource_name) %>
+    </div>
+    <div class="w3-button w3-teal">
+      <%= link_to "Забыли пароль?", new_password_path(resource_name) %>
+    </div>
+  <% end %>
+</div>
+
+

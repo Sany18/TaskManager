@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>X1</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag  href="https://www.w3schools.com/w3css/4/w3.css" %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body onloan="onload()" class="w3-sand">
+    <%= yield %>
+    <div class="w3-container w3-bottom w3-light-grey">
+      <p>Nothing</p>
+    </div>
+  </body>
+</html>

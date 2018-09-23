@@ -1,0 +1,81 @@
+// Place all the styles related to the ttts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#newTask{
+  transition-property: height;
+  transition: 5s 1s;
+}
+
+#kittie{
+  position: absolute;
+  bottom: -210px;
+  left: -180px;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+a:link {
+  color: white;
+}
+
+a:visited {
+  color: white;
+}
+
+a:hover {
+  color: black;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+a:active {
+  color: blue;
+}
+
+
+
+.blacklink a:link {
+  color: black;
+}
+
+.blacklink a:visited {
+  color: black;
+}
+
+.blacklink a:hover {
+  color: black;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.blacklink a:active {
+  color: black;
+}
