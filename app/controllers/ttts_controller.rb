@@ -1,8 +1,6 @@
 class TttsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  # !!!На Heroku не работает так как надо!!!
-  # Потом исправлю вместе с компетентными специалистами.
-  # before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [:index]
   before_action :set_ttt, only: [:show, :edit, :update, :destroy]
 
   # GET /tttsy

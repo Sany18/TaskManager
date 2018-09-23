@@ -34,7 +34,7 @@
           <entry key="erb" value="2" />
           <entry key="js" value="2" />
           <entry key="lock" value="1" />
-          <entry key="rb" value="25" />
+          <entry key="rb" value="28" />
           <entry key="scss" value="4" />
           <entry key="yml" value="5" />
         </counts>
@@ -45,7 +45,7 @@
           <entry key="JavaScript" value="2" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="RHTML" value="2" />
-          <entry key="Ruby" value="28" />
+          <entry key="Ruby" value="31" />
           <entry key="SCSS" value="4" />
           <entry key="YAML" value="5" />
         </counts>
@@ -54,24 +54,51 @@
         <counts>
           <entry key="Gemfile" value="1" />
           <entry key="js" value="3" />
-          <entry key="rb" value="5" />
+          <entry key="rb" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JavaScript" value="3" />
-          <entry key="Ruby" value="6" />
+          <entry key="Ruby" value="21" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Gemfile">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="442">
               <caret line="62" column="15" lean-forward="true" selection-start-line="62" selection-start-column="15" selection-end-line="62" selection-end-column="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/user.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="21" lean-forward="true" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/config/environments/production.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="532">
+              <caret line="108" column="3" selection-start-line="108" selection-start-column="3" selection-end-line="108" selection-end-column="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/environments/development.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="442">
+              <caret line="75" column="3" lean-forward="true" selection-start-line="60" selection-end-line="75" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -91,7 +118,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/config/routes.rb" />
-        <option value="$PROJECT_DIR$/app/models/user.rb" />
         <option value="$PROJECT_DIR$/app/controllers/ttts_controller.rb" />
         <option value="$PROJECT_DIR$/app/controllers/user/registrations_controller.rb" />
         <option value="$PROJECT_DIR$/db/migrate/20180923083128_create_ttts.rb" />
@@ -104,6 +130,7 @@
         <option value="$PROJECT_DIR$/app/assets/javascripts/application.js" />
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/config/database.yml" />
+        <option value="$PROJECT_DIR$/app/models/user.rb" />
         <option value="$PROJECT_DIR$/config/environments/production.rb" />
       </list>
     </option>
@@ -290,15 +317,15 @@
       <workItem from="1537642997623" duration="605000" />
       <workItem from="1537644245319" duration="599000" />
       <workItem from="1537684750093" duration="3226000" />
-      <workItem from="1537697424650" duration="2372000" />
+      <workItem from="1537697424650" duration="2774000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6802000" />
+    <option name="totallyTimeSpent" value="7204000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="63" y="25" width="1303" height="743" extended-state="7" />
+    <frame x="63" y="25" width="1303" height="743" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19570406" />
@@ -336,13 +363,6 @@
     <entry file="file://$PROJECT_DIR$/TaskManager/app/models/application_record.rb" />
     <entry file="file://$PROJECT_DIR$/app/models/application_record.rb">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/user.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config/routes.rb">
       <provider selected="true" editor-type-id="text-editor">
@@ -404,13 +424,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TaskManager/config/environments/development.rb" />
-    <entry file="file://$PROJECT_DIR$/config/environments/development.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="75" column="3" selection-start-line="75" selection-start-column="3" selection-end-line="75" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TaskManager/config/environments/production.rb" />
     <entry file="file://$PROJECT_DIR$/TaskManager/config/application.rb" />
     <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/ttts.scss">
@@ -458,13 +471,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/environments/production.rb">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Gemfile">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="62" column="15" lean-forward="true" selection-start-line="62" selection-start-column="15" selection-end-line="62" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/user.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="21" lean-forward="true" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/environments/development.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="75" column="3" lean-forward="true" selection-start-line="60" selection-end-line="75" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/environments/production.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="108" column="3" selection-start-line="108" selection-start-column="3" selection-end-line="108" selection-end-column="3" />
         </state>
       </provider>
     </entry>
