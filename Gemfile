@@ -60,6 +60,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'pg'
-# gem 'sqlite3'
+gem 'sqlite3'
 gem 'devise'
 gem 'jquery-rails'
+gem 'slim'

@@ -1,0 +1,107 @@
+header class="w3-container w3-light-grey"
+  h1 class="w3-xxxlarge" Система управления задачами
+
+div class="w3-container w3-teal"
+  p id="notice" - notice
+
+- if user_signed_in?
+
+  div class="w3-bar w3-black w3-large"
+    div class="w3-bar-item w3-button" onclick="newTask()" Новая задача
+    <div class="w3-bar-item w3-button w3-right"><%= link_to "Выход", destroy_user_session_path, method: :delete %></div>
+    <div class="w3-bar-item w3-right">Здравствуйте <%= current_user.first_name %>. Не вы?</div>
+  </div>
+
+  <div id="newTask"></div>
+
+  <!-- Пока делаю по простому, передопачивая всю базу здесь -->
+  <div class="w3-half">
+    <div class="w3-dark-gray w3-padding">
+      <div style="display: inline" class="w3-large">Незавершенные задачи:</div>
+      <div class="w3-button"><%= label_tag(:pick_all, "Выделить все ") %>
+        <%= check_box_tag :pick_all, 0, false, {:onclick => "checkboxes_set_all('is_done0')"} %></div>
+      <div class="w3-button" onclick="destroySelected('is_done0')">Удалить выбранное</div>
+    </div>
+    <% @ttts.each do |ttt| %>
+      <% if ttt.user_id == current_user.id and ttt.is_done == 0 %>
+        <div class="w3-dropdown-click">
+          <button onclick="dropDown(<%=ttt.id%>)" class="w3-button <%= @self.colorOfPriority(ttt.priority) %>" style="min-width: 200px">
+            <%= check_box_tag(ttt.id, 0, false, {class: "w3-left w3-margin-right is_done0", style: "height: 20px"}) %>
+            <%= ttt.title %>
+          </button>
+          <div id="dropList<%= ttt.id %>" class="w3-dropdown-content w3-bar-block w3-border" style="min-width: 400px">
+            <div class="w3-bar-item w3-button blacklink w3-light-green"><%= link_to "Сделано", ["ttts", "status_switch", ttt.id] * '/' %></div>
+            <div class="w3-bar-item">Сделать до: <%= ttt.term %></div>
+            <div class="w3-bar-item w3-button"><%= ttt.theme %> </div>
+            <div class="w3-bar-item w3-button blacklink"><%= link_to "Показать", ttt %></div>
+            <div class="w3-bar-item w3-button blacklink"><%= link_to "Редактировать", edit_ttt_path(ttt) %></div>
+            <div class="w3-bar-item w3-button blacklink"><%= link_to "Удалить", ttt, method: :delete, data: {confirm: "Удалить?"} %></div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="w3-half">
+    <div class="w3-teal w3-padding">
+      <div style="display: inline" class="w3-large">Сделано:</div>
+      <div class="w3-button"><%= label_tag(:pick_all, "Выделить все ") %>
+        <%= check_box_tag :pick_all, 0, false, {:onclick => "checkboxes_set_all('is_done1')"} %></div>
+      <div class="w3-button" onclick="destroySelected('is_done1')">Удалить выбранное</div>
+    </div>
+    <% @ttts.each do |ttt| %>
+      <% if ttt.user_id == current_user.id and ttt.is_done == 1 %>
+        <div class="w3-dropdown-click">
+          <button onclick="dropDown(<%=ttt.id%>)" class="w3-button <%= @self.colorOfPriority(ttt.priority) %>" style="min-width: 200px">
+            <%= check_box_tag(ttt.id, 0, false, {class: "w3-left w3-margin-right is_done1", style: "height: 20px"}) %>
+            <%= ttt.title %>
+          </button>
+          <div id="dropList<%= ttt.id %>" class="w3-dropdown-content w3-bar-block w3-border" style="min-width: 400px">
+            <div class="w3-bar-item w3-button blacklink w3-gray"><%= link_to "Не сделано", ["ttts", "status_switch", ttt.id] * '/' %></div>
+            <div class="w3-bar-item">Сделать до: <%= ttt.term %></div>
+            <div class="w3-bar-item w3-button"><%= ttt.theme %> </div>
+            <div class="w3-bar-item w3-button blacklink"><%= link_to "Показать", ttt %></div>
+            <div class="w3-bar-item w3-button blacklink"><%= link_to "Редактировать", edit_ttt_path(ttt) %></div>
+            <div class="w3-bar-item w3-button blacklink"><%= link_to "Удалить", ttt, method: :delete, data: {confirm: "Удалить?"} %></div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <!-- Если не залогинен -->
+<% else %>
+  <div class="w3-bar w3-black w3-large">
+    <div class="w3-bar-item w3-button"><%= link_to "Войдите", new_user_session_path %></div>
+    <div class="w3-bar-item w3-button"><%= link_to "Зарегистрируйтесь", new_user_registration_path %></div>
+  </div>
+  <div class="w3-container">
+    <%= image_tag("kittie.png", alt: "kittie here", id: "kittie") %>
+  </div>
+
+<!-- Шоб работало на Heroku (именно шоб) -->
+  <script>
+      var buttonMove = document.getElementById("kittie");
+      buttonMove.onmousedown = function (a) {
+          function b(a) {
+              buttonMove.style.top = a.pageY - c + "px";
+              buttonMove.style.left = a.pageX - d + "px";
+          }
+
+          var c = a.pageY - buttonMove.getBoundingClientRect().top + pageYOffset,
+              d = a.pageX - buttonMove.getBoundingClientRect().left + pageXOffset;
+          buttonMove.style.position = "absolute";
+          buttonMove.style.position = "fixed";
+          b(a);
+          document.onmousemove = function (a) {
+              b(a);
+          };
+          window.onmouseup = function () {
+              document.onmousemove = null;
+              buttonMove.onmouseup = null;
+          }
+      };
+      buttonMove.ondragstart = function () {
+          return !1;
+      };
+  </script>
+<% end %>
