@@ -44,7 +44,7 @@ function dropDown(id) {
 
 function newTask() {
     var notice = document.getElementById('notice');
-    notice.innerHTML = "Подождите";
+    notice.innerHTML = "Wait";
     var w = setInterval(() => {
         notice.innerHTML = notice.innerHTML + ".";
     }, 250);
@@ -108,7 +108,7 @@ function destroySelected(status) {
         }
     }
     var notice = document.getElementById('notice');
-    notice.innerHTML = "Подождите";
+    notice.innerHTML = "Wait";
     var w = setInterval(() => {
         notice.innerHTML = notice.innerHTML + ".";
     }, 250);

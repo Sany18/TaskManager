@@ -1,29 +1,25 @@
 header.w3-container.w3-light-grey
   h1.w3-xxxlarge
-    | Система управления задачами
+    | Task management system
 .w3-container.w3-teal
   p#notice
     = notice
 - if user_signed_in?
   .w3-bar.w3-black.w3-large
-    .w3-bar-item.w3-button[onclick="newTask()"]
-      | Новая задача
+    .w3-bar-item.w3-button[onclick="newTask()"] Create new task
     .w3-bar-item.w3-button.w3-right
-      = link_to "Выход", destroy_user_session_path, method: :delete
-    .w3-bar-item.w3-right
-      | Здравствуйте
-      = current_user.first_name
-      | . Не вы?
+      = link_to "Exit", destroy_user_session_path, method: :delete
+    .w3-bar-item.w3-right Hello, #{current_user.first_name}. Not you?
   #newTask
   div class="w3-half"
     .w3-dark-gray.w3-padding
       .w3-large[style="display: inline"]
-        | Незавершенные задачи:
+        | Unfinished tasks:
       .w3-button
-        = label_tag(:pick_all, "Выделить все ")
+        = label_tag(:pick_all, "Select all ")
         = check_box_tag :pick_all, 0, false, {:onclick => "checkboxes_set_all('is_done0')"}
       .w3-button[onclick="destroySelected('is_done0')"]
-        | Удалить выбранное
+        | Delete selected
     - @ttts.each do |ttt|
       - if ttt.user_id == current_user.id and ttt.is_done == 0
         .w3-dropdown-click
@@ -32,24 +28,24 @@ header.w3-container.w3-light-grey
             = ttt.title
           div id="dropList#{ttt.id}" class="w3-dropdown-content w3-bar-block w3-border" style="min-width: 400px"
             .w3-bar-item.w3-button.blacklink.w3-light-green
-              = link_to "Сделано", ["ttts", "status_switch", ttt.id] * '/'
-            .w3-bar-item Сделать до: #{ttt.term}
+              = link_to "Done", ["ttts", "status_switch", ttt.id] * '/'
+            .w3-bar-item Make up to: #{ttt.term}
             .w3-bar-item.w3-button #{ttt.theme}
             .w3-bar-item.w3-button.blacklink
-              = link_to "Показать", ttt
+              = link_to "Show", ttt
             .w3-bar-item.w3-button.blacklink
-              = link_to "Редактировать", edit_ttt_path(ttt)
+              = link_to "Edit", edit_ttt_path(ttt)
             .w3-bar-item.w3-button.blacklink
-              = link_to "Удалить", ttt, method: :delete, data: {confirm: "Удалить?"}
+              = link_to "Delete", ttt, method: :delete, data: {confirm: "Delete?"}
   div class="w3-half"
     .w3-teal.w3-padding
       .w3-large[style="display: inline"]
-        | Сделано:
+        | Finished:
       .w3-button
-        = label_tag(:pick_all, "Выделить все ")
+        = label_tag(:pick_all, "Select all ")
         = check_box_tag :pick_all, 0, false, {:onclick => "checkboxes_set_all('is_done1')"}
       .w3-button[onclick="destroySelected('is_done1')"]
-        | Удалить выбранное
+        | Delete selected
     - @ttts.each do |ttt|
       - if ttt.user_id == current_user.id and ttt.is_done == 1
         .w3-dropdown-click
@@ -58,20 +54,20 @@ header.w3-container.w3-light-grey
             = ttt.title
           .w3-dropdown-content.w3-bar-block.w3-border id="dropList#{ttt.id}" style="min-width: 400px"
             .w3-bar-item.w3-button.blacklink.w3-gray
-              = link_to "Не сделано", ["ttts", "status_switch", ttt.id] * '/'
-            .w3-bar-item Сделать до: #{ttt.term}
+              = link_to "Not done", ["ttts", "status_switch", ttt.id] * '/'
+            .w3-bar-item Make up to: #{ttt.term}
             .w3-bar-item.w3-button #{ttt.theme}
             .w3-bar-item.w3-button.blacklink
-              = link_to "Показать", ttt
+              = link_to "Show", ttt
             .w3-bar-item.w3-button.blacklink
-              = link_to "Редактировать", edit_ttt_path(ttt)
+              = link_to "Edit", edit_ttt_path(ttt)
             .w3-bar-item.w3-button.blacklink
-              = link_to "Удалить", ttt, method: :delete, data: {confirm: "Удалить?"}
+              = link_to "Delete", ttt, method: :delete, data: {confirm: "Are you sure?"}
 - else
   .w3-bar.w3-black.w3-large
     .w3-bar-item.w3-button
-      = link_to "Войдите", new_user_session_path
+      = link_to "Sing up", new_user_session_path
     .w3-bar-item.w3-button
-      = link_to "Зарегистрируйтесь", new_user_registration_path
+      = link_to "Sing in", new_user_registration_path
     .w3-container
       = image_tag("kittie.png", alt: "kittie here", id: "kittie")

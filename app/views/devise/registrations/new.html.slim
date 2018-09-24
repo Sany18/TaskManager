@@ -1,0 +1,41 @@
+.w3-container.w3-teal
+  h2
+    | Registration
+= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+  = devise_error_messages!
+  = csrf_meta_tags
+  = csp_meta_tag
+  .w3-container.w3-teal
+    p.notice
+      = notice
+    p.alert
+      = alert
+  .w3-container
+    .field
+      = f.label "Your name"
+      br
+      = f.text_field :first_name, autofocus: true
+    .field
+      = f.label "Last name"
+      br
+      = f.text_field :last_name
+    .field
+      = f.label :email
+      br
+      = f.email_field :email, autocomplete: "Email"
+    .field
+      = f.label "Create a password"
+      - if @minimum_password_length
+        em
+          | (
+          = @minimum_password_length
+          |  characters minimum)
+      br
+      = f.password_field :password, autocomplete: "new-password"
+    .field
+      = f.label "Confirm the password"
+      br
+      = f.password_field :password_confirmation, autocomplete: "new-password"
+    input.w3-button.w3-teal[type="submit" value="Will register"]
+    .w3-bar-item.w3-button.w3-teal
+      = link_to "Sing in", new_user_session_path
