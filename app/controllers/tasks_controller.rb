@@ -1,77 +1,77 @@
-class TttsController < ApplicationController
+class TasksController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :authenticate_user!, except: [:index]
-  before_action :set_ttt, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy]
 
-  # GET /tttsy
-  # GET /ttts.json
+  # GET /tasksy
+  # GET /task.json
   def index
-    @ttts = Ttt.all
+    @tasks = Task.all
     @self = self
   end
 
-  # GET /ttts/1
-  # GET /ttts/1.json
+  # GET /task/1
+  # GET /task/1.json
   def show
   end
 
-  # GET /ttts/new
+  # GET /task/new
   def new
-    @ttt = Ttt.new
+    @task = Task.new
     @dateNow = self.getDateNow
     @self = self
   end
 
-  # GET /ttts/1/edit
+  # GET /task/1/edit
   def edit
     @dateNow = self.getDateNow
     @self = self
   end
 
-  # POST /ttts
-  # POST /ttts.json
+  # POST /task
+  # POST /task.json
   def create
-    @ttt = Ttt.new(ttt_params)
+    @task = Task.new(task_params)
 
     respond_to do |format|
-      if @ttt.save
-        format.html {redirect_to @ttt, notice: "Запись создана."}
-        format.json {render :show, status: :created, location: @ttt}
+      if @task.save
+        format.html {redirect_to @task, notice: "Запись создана."}
+        format.json {render :show, status: :created, location: @task}
       else
         format.html {render :new}
-        format.json {render json: @ttt.errors, status: :unprocessable_entity}
+        format.json {render json: @task.errors, status: :unprocessable_entity}
       end
     end
   end
 
-  # PATCH/PUT /ttts/1
-  # PATCH/PUT /ttts/1.json
+  # PATCH/PUT /task/1
+  # PATCH/PUT /task/1.json
   def update
     respond_to do |format|
-      if @ttt.update(ttt_params)
-        format.html {redirect_to @ttt, notice: "Задача обновлена."}
-        format.json {render :show, status: :ok, location: @ttt}
+      if @task.update(task_params)
+        format.html {redirect_to @task, notice: "Задача обновлена."}
+        format.json {render :show, status: :ok, location: @task}
       else
         format.html {render :edit}
-        format.json {render json: @ttt.errors, status: :unprocessable_entity}
+        format.json {render json: @task.errors, status: :unprocessable_entity}
       end
     end
   end
 
-  # DELETE /ttts/1
-  # DELETE /ttts/1.json
+  # DELETE /task/1
+  # DELETE /task/1.json
   def destroy
-    @ttt.destroy
+    @task.destroy
     respond_to do |format|
-      format.html {redirect_to ttts_url, notice: "Задача удалена."}
+      format.html {redirect_to tasks_url, notice: "Задача удалена."}
       format.json {head :no_content}
     end
   end
 
   def destroy_selected
     params[:id].split("%").map do |id|
-      ttt = Ttt.find_by(id: id)
-      ttt.destroy
+      task = Task.find_by(id: id)
+      task.destroy
     end
 
     respond_to do |format|
@@ -82,11 +82,11 @@ class TttsController < ApplicationController
 
   def statusSwitch
     id = params[:id]
-    ttt = Ttt.find_by(id: id)
-    if ttt.is_done == 0
-      ttt.update(is_done: 1)
+    task = Task.find_by(id: id)
+    if task.is_done == 0
+      task.update(is_done: 1)
     else
-      ttt.update(is_done: 0)
+      task.update(is_done: 0)
     end
 
     respond_to do |format|
@@ -129,12 +129,12 @@ class TttsController < ApplicationController
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_ttt
-    @ttt = Ttt.find(params[:id])
+  def set_task
+    @task = Task.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
-  def ttt_params
-    params.require(:ttt).permit(:title, :theme, :priority, :term, :user_id, :is_done)
+  def task_params
+    params.require(:task).permit(:title, :theme, :priority, :term, :user_id, :is_done)
   end
 end

@@ -20,7 +20,7 @@ class TttsControllerTest < ActionDispatch::IntegrationTest
       post ttts_url, params: { ttt: {  } }
     end
 
-    assert_redirected_to ttt_url(Ttt.last)
+    assert_redirected_to ttt_url(Task.last)
   end
 
   test "should show ttt" do

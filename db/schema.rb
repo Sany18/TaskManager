@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2018_09_23_083318) do
 
-  create_table "ttts", force: :cascade do |t|
+  create_table "tasks", force: :cascade do |t|
     t.string "title"
     t.string "theme"
     t.integer "priority"

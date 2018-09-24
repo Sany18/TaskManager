@@ -55,7 +55,7 @@ function newTask() {
             method: 'GET',
             credentials: 'include'
         };
-        fetch(HEROKUROOT + '/ttts/new', myInit)
+        fetch(HEROKUROOT + '/tasks/new', myInit)
             .then(function (address) {
                 return address.text();
             })
@@ -96,7 +96,7 @@ function getColor(id) {
 }
 
 function destroySelected(status) {
-    var path = HEROKUROOT + "/ttts/delete_selected/";
+    var path = HEROKUROOT + "/tasks/delete_selected/";
     var myInit = {
         method: 'DELETE',
         credentials: 'include'
