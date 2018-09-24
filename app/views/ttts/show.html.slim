@@ -1,0 +1,18 @@
+.w3-conteiner.w3-teal style="padding-left: 16px"
+  p#notice= notice
+  h3
+    | Тема: #{@ttt.title}
+.w3-container
+  p
+    strong Задача:
+    = @ttt.theme
+  p
+    strong Приоритет (1-5):
+    = @ttt.priority
+  p
+    strong Срок выполнения:
+    = @ttt.term
+  .w3-button.w3-teal
+    = link_to 'Редактировать', edit_ttt_path(@ttt)
+  .w3-button.w3-teal
+    = link_to 'Назад', ttts_path

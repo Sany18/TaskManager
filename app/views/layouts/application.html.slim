@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title To do
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag  href="https://www.w3schools.com/w3css/4/w3.css"
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body.w3-sand[onloan="onload()"]
+    = yield
+    .w3-container.w3-bottom.w3-light-grey
+      p
+        | Nothing

@@ -116,29 +116,28 @@ function destroySelected(status) {
         .then(() => window.location = "/");
 }
 
-// !!!Не работает на Heroku!!!
-// window.onload = function() {
-//     var buttonMove = document.getElementById("kittie");
-//     buttonMove.onmousedown = function (a) {
-//         function b(a) {
-//             buttonMove.style.top = a.pageY - c + "px";
-//             buttonMove.style.left = a.pageX - d + "px";
-//         }
-//
-//         var c = a.pageY - buttonMove.getBoundingClientRect().top + pageYOffset,
-//             d = a.pageX - buttonMove.getBoundingClientRect().left + pageXOffset;
-//         buttonMove.style.position = "absolute";
-//         buttonMove.style.position = "fixed";
-//         b(a);
-//         document.onmousemove = function (a) {
-//             b(a);
-//         };
-//         window.onmouseup = function () {
-//             document.onmousemove = null;
-//             buttonMove.onmouseup = null;
-//         }
-//     };
-//     buttonMove.ondragstart = function () {
-//         return !1;
-//     };
-// };
+window.onload = function() {
+    var buttonMove = document.getElementById("kittie");
+    buttonMove.onmousedown = function (a) {
+        function b(a) {
+            buttonMove.style.top = a.pageY - c + "px";
+            buttonMove.style.left = a.pageX - d + "px";
+        }
+
+        var c = a.pageY - buttonMove.getBoundingClientRect().top + pageYOffset,
+            d = a.pageX - buttonMove.getBoundingClientRect().left + pageXOffset;
+        buttonMove.style.position = "absolute";
+        buttonMove.style.position = "fixed";
+        b(a);
+        document.onmousemove = function (a) {
+            b(a);
+        };
+        window.onmouseup = function () {
+            document.onmousemove = null;
+            buttonMove.onmouseup = null;
+        }
+    };
+    buttonMove.ondragstart = function () {
+        return !1;
+    };
+};
