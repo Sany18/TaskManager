@@ -3,10 +3,10 @@ class TasksController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
-  # GET /tasksy
+  # GET /tasks
   # GET /task.json
   def index
-    @tasks = Task.all
+    @tasks = Task.all.where(user_id: current_user.id)
     @self = self
   end
 
