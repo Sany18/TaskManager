@@ -39,7 +39,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html {redirect_to @task, notice: "Запись создана."}
+        format.html {redirect_to @task, notice: "Task created."}
         format.json {render :show, status: :created, location: @task}
       else
         format.html {render :new}
@@ -53,7 +53,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html {redirect_to @task, notice: "Задача обновлена."}
+        format.html {redirect_to @task, notice: "Task updated."}
         format.json {render :show, status: :ok, location: @task}
       else
         format.html {render :edit}
@@ -67,7 +67,7 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     respond_to do |format|
-      format.html {redirect_to tasks_url, notice: "Задача удалена."}
+      format.html {redirect_to tasks_url, notice: "Task deleted."}
       format.json {head :no_content}
     end
   end
@@ -79,7 +79,7 @@ class TasksController < ApplicationController
     end
 
     respond_to do |format|
-      format.html {redirect_to "/", notice: "Выбранные задачи удалены."}
+      format.html {redirect_to "/", notice: "Selected tasks deleted."}
       format.json {head :no_content}
     end
   end

@@ -1,0 +1,10 @@
+p Hi #{@email}!
+- if @resource.try(:unconfirmed_email?)
+  p We will contact you to notify you that your email has changed to
+    = @resource.unconfirmed_email
+    | .
+- else
+  p
+    | We will contact you to notify you that your email has changed
+    = @resource.email
+    | .
