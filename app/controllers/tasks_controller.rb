@@ -94,7 +94,7 @@ class TasksController < ApplicationController
     end
 
     respond_to do |format|
-      format.html {redirect_to "/", notice: "Изменено."}
+      format.html {redirect_to "/", notice: "Changed."}
       format.json {head :no_content}
     end
   end
