@@ -116,7 +116,7 @@ function destroySelected(status) {
         .then(() => window.location = "/");
 }
 
-window.onload = function() {
+window.onload = function () {
     var buttonMove = document.getElementById("kittie");
     buttonMove.onmousedown = function (a) {
         function b(a) {
