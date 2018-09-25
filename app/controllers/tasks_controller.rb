@@ -10,7 +10,9 @@ class TasksController < ApplicationController
       @tasks = Task.all.where(user_id: current_user.id)
       @self = self
     else
-      redirect_to new_user_session_path
+      respond_to do |page|
+        page.html {redirect_to new_user_session_path, notice: "You need to sign in first."}
+      end
     end
   end
 
