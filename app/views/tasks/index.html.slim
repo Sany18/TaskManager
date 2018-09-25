@@ -2,72 +2,62 @@ header.w3-container.w3-light-grey
   h1.w3-xxxlarge
     | Task management system
 .w3-container.w3-teal
-  p#notice
-    = notice
-- if user_signed_in?
-  .w3-bar.w3-black.w3-large
-    .w3-bar-item.w3-button[onclick="newTask()"] Create new task
-    .w3-bar-item.w3-button.w3-right
-      = link_to "Exit", destroy_user_session_path, method: :delete
-    .w3-bar-item.w3-right Hello, #{current_user.first_name}. Not you?
-  #newTask
-  div class="w3-half"
-    .w3-dark-gray.w3-padding
-      .w3-large[style="display: inline"]
-        | Unfinished tasks:
-      .w3-button
-        = label_tag(:pick_all, "Select all ")
-        = check_box_tag :pick_all, 0, false, {:onclick => "checkboxes_set_all('is_done0')"}
-      .w3-button[onclick="destroySelected('is_done0')"]
-        | Delete selected
-    - @tasks.each do |task|
-      - if task.is_done == 0
-        .w3-dropdown-click
-          button onclick="dropDown(#{task.id})" class="w3-button #{@self.colorOfPriority(task.priority)}" style="min-width: 200px"
-            = check_box_tag(task.id, 0, false, {class: "w3-left w3-margin-right is_done0", style: "height: 20px"})
-            = task.title
-          div id="dropList#{task.id}" class="w3-dropdown-content w3-bar-block w3-border" style="min-width: 400px"
-            .w3-bar-item.w3-button.blacklink.w3-light-green
-              = link_to "Done", ["task", "status_switch", task.id] * '/'
-            .w3-bar-item Make up to: #{task.term}
-            .w3-bar-item.w3-button #{task.theme}
-            .w3-bar-item.w3-button.blacklink
-              = link_to "Show", task
-            .w3-bar-item.w3-button.blacklink
-              = link_to "Edit", edit_task_path(task)
-            .w3-bar-item.w3-button.blacklink
-              = link_to "Delete", task, method: :delete, data: {confirm: "Delete?"}
-  div class="w3-half"
-    .w3-teal.w3-padding
-      .w3-large[style="display: inline"]
-        | Finished:
-      .w3-button
-        = label_tag(:pick_all, "Select all ")
-        = check_box_tag :pick_all, 0, false, {:onclick => "checkboxes_set_all('is_done1')"}
-      .w3-button[onclick="destroySelected('is_done1')"]
-        | Delete selected
-    - @tasks.each do |task|
-      - if task.is_done == 1
-        .w3-dropdown-click
-          button onclick="dropDown(#{task.id})" class="w3-button #{@self.colorOfPriority(task.priority)}" style="min-width: 200px"
-            = check_box_tag(task.id, 0, false, {class: "w3-left w3-margin-right is_done1", style: "height: 20px"})
-            = task.title
-          .w3-dropdown-content.w3-bar-block.w3-border id="dropList#{task.id}" style="min-width: 400px"
-            .w3-bar-item.w3-button.blacklink.w3-gray
-              = link_to "Not done", ["task", "status_switch", task.id] * '/'
-            .w3-bar-item Make up to: #{task.term}
-            .w3-bar-item.w3-button #{task.theme}
-            .w3-bar-item.w3-button.blacklink
-              = link_to "Show", task
-            .w3-bar-item.w3-button.blacklink
-              = link_to "Edit", edit_task_path(task)
-            .w3-bar-item.w3-button.blacklink
-              = link_to "Delete", task, method: :delete, data: {confirm: "Are you sure?"}
-- else
-  .w3-bar.w3-black.w3-large
-    .w3-bar-item.w3-button
-      = link_to "Sing in", new_user_session_path
-    .w3-bar-item.w3-button
-      = link_to "Sing up", new_user_registration_path
-    .w3-container
-      = image_tag("kittie.png", alt: "kittie here", id: "kittie")
+  p#notice #{notice}
+.w3-bar.w3-black.w3-large
+  .w3-bar-item.w3-button[onclick="newTask()"] Create new task
+  .w3-bar-item.w3-button.w3-right
+    = link_to "Exit", destroy_user_session_path, method: :delete
+  .w3-bar-item.w3-right Hello, #{current_user.first_name}. Not you?
+#newTask
+div class="w3-half"
+  .w3-dark-gray.w3-padding
+    .w3-large[style="display: inline"]
+      | Unfinished tasks:
+    .w3-button
+      = label_tag(:pick_all, "Select all ")
+      = check_box_tag :pick_all, 0, false, {:onclick => "checkboxes_set_all('is_done0')"}
+    .w3-button[onclick="destroySelected('is_done0')"]
+      | Delete selected
+  - @tasks.each do |task|
+    - if task.is_done == 0
+      .w3-dropdown-click
+        button onclick="dropDown(#{task.id})" class="w3-button #{@self.colorOfPriority(task.priority)}" style="min-width: 200px"
+          = check_box_tag(task.id, 0, false, {class: "w3-left w3-margin-right is_done0", style: "height: 20px"})
+          = task.title
+        div id="dropList#{task.id}" class="w3-dropdown-content w3-bar-block w3-border" style="min-width: 400px"
+          .w3-bar-item.w3-button.blacklink.w3-light-green
+            = link_to "Done", ["task", "status_switch", task.id] * '/'
+          .w3-bar-item Make up to: #{task.term}
+          .w3-bar-item.w3-button #{task.theme}
+          .w3-bar-item.w3-button.blacklink
+            = link_to "Show", task
+          .w3-bar-item.w3-button.blacklink
+            = link_to "Edit", edit_task_path(task)
+          .w3-bar-item.w3-button.blacklink
+            = link_to "Delete", task, method: :delete, data: {confirm: "Delete?"}
+div class="w3-half"
+  .w3-teal.w3-padding
+    .w3-large[style="display: inline"]
+      | Finished:
+    .w3-button
+      = label_tag(:pick_all, "Select all ")
+      = check_box_tag :pick_all, 0, false, {:onclick => "checkboxes_set_all('is_done1')"}
+    .w3-button[onclick="destroySelected('is_done1')"]
+      | Delete selected
+  - @tasks.each do |task|
+    - if task.is_done == 1
+      .w3-dropdown-click
+        button onclick="dropDown(#{task.id})" class="w3-button #{@self.colorOfPriority(task.priority)}" style="min-width: 200px"
+          = check_box_tag(task.id, 0, false, {class: "w3-left w3-margin-right is_done1", style: "height: 20px"})
+          = task.title
+        .w3-dropdown-content.w3-bar-block.w3-border id="dropList#{task.id}" style="min-width: 400px"
+          .w3-bar-item.w3-button.blacklink.w3-gray
+            = link_to "Not done", ["task", "status_switch", task.id] * '/'
+          .w3-bar-item Make up to: #{task.term}
+          .w3-bar-item.w3-button #{task.theme}
+          .w3-bar-item.w3-button.blacklink
+            = link_to "Show", task
+          .w3-bar-item.w3-button.blacklink
+            = link_to "Edit", edit_task_path(task)
+          .w3-bar-item.w3-button.blacklink
+            = link_to "Delete", task, method: :delete, data: {confirm: "Are you sure?"}

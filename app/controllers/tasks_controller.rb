@@ -6,8 +6,12 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /task.json
   def index
-    @tasks = Task.all.where(user_id: current_user.id)
-    @self = self
+    if user_signed_in?
+      @tasks = Task.all.where(user_id: current_user.id)
+      @self = self
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   # GET /task/1
@@ -80,7 +84,7 @@ class TasksController < ApplicationController
     end
   end
 
-  def statusSwitch
+  def status_switch
     id = params[:id]
     task = Task.find_by(id: id)
     if task.is_done == 0
