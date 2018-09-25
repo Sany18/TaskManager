@@ -96,7 +96,7 @@ function getColor(id) {
 }
 
 function destroySelected(status) {
-    var path = HEROKUROOT + "/tasks/delete_selected/";
+    var path = HEROKUROOT + "/task/delete_selected/";
     var myInit = {
         method: 'DELETE',
         credentials: 'include'
