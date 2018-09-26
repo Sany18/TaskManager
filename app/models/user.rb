@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :registerable,
          :recoverable,
          :rememberable,
-         :validatable,
+         :validatable
          # :confirmable
 
   validates :first_name, presence: true
