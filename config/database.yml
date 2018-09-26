@@ -1,13 +1,13 @@
-default: &default
-  adapter: postgresql
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
+#default: &default
+#  adapter: postgresql
+#  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+#  timeout: 5000
 
 development:
   adapter: postgresql
   encoding: unicode
   database: db/my_db
-  pool: 5
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
   username: sa
   host: localhost
@@ -16,13 +16,23 @@ development:
 
 test:
   adapter: postgresql
+  encoding: unicode
   database: db/my_db
-  pool: 5
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
+  username: sa
+  host: localhost
+  port: 5432
+  password: pass
 
 production:
   adapter: postgresql
   encoding: unicode
   database: db/my_db
-  pool: 5
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
+  username: sa
+  host: localhost
+  port: 5432
+  password: pass
+

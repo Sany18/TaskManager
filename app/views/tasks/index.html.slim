@@ -21,7 +21,7 @@ div class="w3-half"
   - @tasks.each do |task|
     - if task.is_done == 0
       .w3-dropdown-click
-        button onclick="dropDown(#{task.id})" class="w3-button #{@self.colorOfPriority(task.priority)}" style="min-width: 200px"
+        button onclick="dropDown(#{task.id})" class="w3-button #{color_of_priority(task.priority)}" style="min-width: 200px"
           = check_box_tag(task.id, 0, false, {class: "w3-left w3-margin-right is_done0", style: "height: 20px"})
           = task.title
         div id="dropList#{task.id}" class="w3-dropdown-content w3-bar-block w3-border" style="min-width: 400px"
@@ -47,7 +47,7 @@ div class="w3-half"
   - @tasks.each do |task|
     - if task.is_done == 1
       .w3-dropdown-click
-        button onclick="dropDown(#{task.id})" class="w3-button #{@self.colorOfPriority(task.priority)}" style="min-width: 200px"
+        button onclick="dropDown(#{task.id})" class="w3-button #{color_of_priority(task.priority)}" style="min-width: 200px"
           = check_box_tag(task.id, 0, false, {class: "w3-left w3-margin-right is_done1", style: "height: 20px"})
           = task.title
         .w3-dropdown-content.w3-bar-block.w3-border id="dropList#{task.id}" style="min-width: 400px"
