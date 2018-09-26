@@ -65,8 +65,8 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
       #smtp login:
-      user_name:     "parubok.sashko@gmail.com",
-      password:      "Q4514445",
+      user_name:     ENV["email"],
+      password:      ENV["e_pass"],
       domain:        "gmail.com",
       #smtp server:
       address:       "smtp.gmail.com",
