@@ -94,13 +94,13 @@ Rails.application.configure do
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { host: "localhost", port: 80 }
+  config.action_mailer.default_url_options = { host: "https://protected-taiga-81728.herokuapp.com" }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
       #smtp login:
       user_name:     ENV["email"],
       password:      ENV["e_pass"],
-      domain:        "gmail.com",
+      domain:        "heroku.com",
       #smtp server:
       address:       "smtp.gmail.com",
       port:          "587",
