@@ -8,5 +8,5 @@ class User < ApplicationRecord
          :validatable
          # :confirmable
 
-  validates :first_name, presence: true
+  validates :first_name, :last_name, :email, presence: true
 end
