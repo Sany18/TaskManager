@@ -13,7 +13,6 @@
         null,
         null,
         1,
-        1,
         null
       ],
       "/home/sa/x1/app/models/application_record.rb": [
@@ -73,8 +72,8 @@
         0,
         0,
         null,
-        0,
-        0,
+        1,
+        2,
         null,
         null,
         null,
@@ -312,6 +311,6 @@
         null
       ]
     },
-    "timestamp": 1538057310
+    "timestamp": 1538136888
   }
 }
