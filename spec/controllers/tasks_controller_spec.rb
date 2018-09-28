@@ -1,28 +1,48 @@
 require 'rails_helper'
-# require 'devise'
 
 RSpec.describe TasksController, type: :controller do
-  RSpec.configure do |config|
-    config.include Devise::Test::ControllerHelpers, type: :controller
+  before(:each) do
+    @request.env["devise.mapping"] = Devise.mappings[:user]
+    sign_in FactoryBot.create(:user)
   end
 
-  let(:token) {user_signed_in? {true} }
-
   describe "#index" do
-    it "should get 302" do
+    it "if user is up" do
+      get :index
+      expect(response.status).to eq(200)
+    end
+
+    it "if user is down" do
+      sign_out FactoryBot.create(:user)
       get :index
       expect(response.status).to eq(302)
+    end
+
+    it "inner methods" do
     end
   end
 
   it "should get new" do
-    :new
+    get :new
     expect(response.status).to eq(200)
   end
 
-  it "should create task" do
-    :tasks_new_url
-    expect(response.status).to eq(200)
+  # it "should get show" do
+  #   get :show
+  #   expect(response.status).to eq(200)
+  # end
+
+  context "create task" do
+    # let(:task) {{:title => "fake",
+    #              :theme => "fake",
+    #              :priority => "fake",
+    #              :term => "fake",
+    #              :user_id => "1",
+    #              :is_done => "0"}}
+    it "should create task" do
+      post :create
+      expect(response.status).to eq(200)
+    end
   end
 
   it "should show task" do
