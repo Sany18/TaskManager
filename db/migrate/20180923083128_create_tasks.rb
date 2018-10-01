@@ -7,6 +7,7 @@ class CreateTasks < ActiveRecord::Migration[5.2]
       t.datetime :term
       t.integer :user_id
       t.integer :is_done, default: 0
+      t.belongs_to :user, index: true
 
       t.timestamps
     end
