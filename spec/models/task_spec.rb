@@ -51,3 +51,8 @@ RSpec.describe Task, type: :model do
     end
   end
 end
+
+# context 'validation' do
+#   let(:user) { create(:user) }
+#   it { expect(user).to be_valid }
+# end

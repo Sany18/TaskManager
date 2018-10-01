@@ -70,6 +70,7 @@ class TasksController < ApplicationController
     end
   end
 
+  # DELETE /task/delete_selected/1
   def destroy_selected
     params[:id].split("%").map do |id|
       task = Task.find_by(id: id)
@@ -82,6 +83,7 @@ class TasksController < ApplicationController
     end
   end
 
+  #GET /task/status_switch/1
   def status_switch
     id = params[:id]
     task = Task.find_by(id: id)
