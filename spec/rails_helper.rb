@@ -2,6 +2,8 @@
 require 'spec_helper'
 require 'simplecov'
 require 'devise'
+require 'factory_bot'
+require 'bot_helper'
 ENV['RAILS_ENV'] ||= 'test'
 
 SimpleCov.start "rails" do
@@ -31,19 +33,8 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
 
+  config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::ControllerHelpers, :type => :controller
   config.include Devise::Test::IntegrationHelpers, type: :feature
   # config.extend ControllerMacros, :type => :controller
-end
-
-
-FactoryBot.define do
-  factory :user do
-    first_name {Faker::Name::first_name}
-    last_name {Faker::Name::last_name}
-    email {Faker::Internet.email}
-    password {"password"}
-    password_confirmation {"password"}
-    confirmed_at {Date.today}
-  end
 end
