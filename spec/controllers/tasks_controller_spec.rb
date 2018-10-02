@@ -8,9 +8,6 @@ RSpec.describe TasksController, type: :controller do
     sign_in @user
   end
 
-  let(:invalid_params) { {task: build(:task, title: nil).attributes} }
-  let(:valid_params) { {task: build(:task).attributes} }
-
   # GET /tasks
   context "#index" do
     it "should ret. 200 if user is up" do
@@ -28,9 +25,9 @@ RSpec.describe TasksController, type: :controller do
 
   # GET /task/:id
   context "#show" do
+    let(:params) { task = create(:task); {id: task.id} }
     it "should show task" do
-      task = create(:task)
-      get :show, params: {id: task.id}
+      get :show, params: params
       expect(response).to have_http_status(200)
     end
   end
@@ -41,7 +38,7 @@ RSpec.describe TasksController, type: :controller do
       get :new
       expect(response).to have_http_status(200)
     end
-    it "should have " do
+    it "should have new Task" do
       get :new
       expect(assigns(:task)).to be_a_new(Task)
     end
@@ -49,59 +46,60 @@ RSpec.describe TasksController, type: :controller do
 
   # GET /task/1/edit
   context "#edit" do
+    let(:params) { task = create(:task); {id: task.id} }
     it "should direct to edit" do
-      task = create(:task)
-      get :edit, params: {id: task.id}
+      get :edit, params: params
       expect(response).to have_http_status(200)
     end
   end
 
   # POST /task
   context "#create" do
+    let(:params) { {task: build(:task).attributes} }
     it "should create task" do
       # sign_in FactoryBot.create(:user)
-      post :create, params: valid_params
+      post :create, params: params
       expect(response).to have_http_status(302)
     end
 
-    it "" do
-      post :create, params: invalid_params
-      expect(response).to have_http_status(200)
+    it "should have new Task" do
+      get :new
+      expect(assigns(:task)).to be_a_new(Task)
     end
   end
 
   # PATCH/PUT /task/:id
   context "#update" do
+    let(:params) { task = create(:task); {id: task.id, task: task.attributes} }
     it "should update task" do
-      task = create(:task)
-      put :update, params: {id: task.id, task: task.attributes}
+      put :update, params: params
       expect(response).to have_http_status(302)
     end
   end
 
   # DELETE /task/:id
   context "#destroy" do
+    let(:params) { task = create(:task); {id: task.id} }
     it "should destroy task" do
-      task = create(:task)
-      delete :destroy, params: {id: task.id}
+      delete :destroy, params: params
       expect(response).to have_http_status(302)
     end
   end
 
   # DELETE /task/delete_selected/:id
   context "#destroy selected" do
+    let(:params) { task = create(:task); {id: task.id} }
     it "should delete selected task" do
-      task = create(:task)
-      delete :destroy_selected, params: {id: task.id}
+      delete :destroy_selected, params: params
       expect(response).to have_http_status(302)
     end
   end
 
   #GET /task/status_switch/:id
   context "#status_switch" do
+    let(:params) { task = create(:task); {id: task.id} }
     it "should change status" do
-      task = create(:task)
-      get :status_switch, params: {id: task.id}
+      get :status_switch, params: params
       expect(response).to have_http_status(302)
     end
   end

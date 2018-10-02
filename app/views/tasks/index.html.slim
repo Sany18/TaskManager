@@ -1,6 +1,7 @@
 header.w3-container.w3-light-grey
   h1.w3-xxxlarge
     | Task management system
+    = image_tag("kittien.png", alt: "kittien here", id: "kittien")
 .w3-container.w3-teal
   p#notice #{notice}
 .w3-bar.w3-black.w3-large
@@ -61,5 +62,3 @@ div class="w3-half"
             = link_to "Edit", edit_task_path(task)
           .w3-bar-item.w3-button.blacklink
             = link_to "Delete", task, method: :delete, data: {confirm: "Are you sure?"}
-.w3-container
-  = image_tag("kittien.png", alt: "kittien here", id: "kittien")

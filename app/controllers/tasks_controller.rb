@@ -23,7 +23,7 @@ class TasksController < ApplicationController
 
   # GET /task/new
   def new
-    @task = Task.new
+    @task = current_user.tasks.new
   end
 
   # GET /task/1/edit
