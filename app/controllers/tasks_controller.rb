@@ -7,7 +7,7 @@ class TasksController < ApplicationController
   # GET /task.json
   def index
     if user_signed_in?
-      @tasks = Task.all.where(user_id: current_user.id)
+      @tasks = current_user.tasks
       @self = self
     else
       respond_to do |page|
@@ -33,8 +33,7 @@ class TasksController < ApplicationController
   # POST /task
   # POST /task.json
   def create
-    @task = Task.new(task_params)
-    @task[:user_id] = current_user.id
+    @task = current_user.tasks.new(task_params)
 
     respond_to do |format|
       if @task.save

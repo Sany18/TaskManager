@@ -25,6 +25,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.8'
   gem 'simplecov', require: false
   gem 'rails-controller-testing'
+  gem 'shoulda-matchers'
 end
 
 group :development do

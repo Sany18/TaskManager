@@ -1,23 +1,24 @@
 require 'rails_helper'
+include Shoulda::Matchers::ActiveModel
 
 RSpec.describe Task, type: :model do
   describe "model:" do
     context "without a" do
       it "title" do
-        task = build(:task, title: nil)
-        expect(task).to_not be_valid
+        subject { build(:task) }
+        should validate_presence_of(:title)
       end
       it "theme" do
-        task = build(:task, theme: nil)
-        expect(task).to_not be_valid
+        subject { build(:task) }
+        should validate_presence_of(:theme)
       end
       it "priority" do
-        task = build(:task, priority: nil)
-        expect(task).to_not be_valid
+        subject { build(:task) }
+        should validate_presence_of(:priority)
       end
       it "user_id" do
-        task = build(:task, user_id: nil)
-        expect(task).to_not be_valid
+        subject { build(:task) }
+        should validate_presence_of(:user_id)
       end
     end
 
