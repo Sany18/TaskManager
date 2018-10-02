@@ -117,7 +117,7 @@ function destroySelected(status) {
 }
 
 window.onload = function () {
-    var buttonMove = document.getElementById("kittie");
+    var buttonMove = document.getElementById("kittien");
     buttonMove.onmousedown = function (a) {
         function b(a) {
             buttonMove.style.top = a.pageY - c + "px";
