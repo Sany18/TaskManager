@@ -19,7 +19,7 @@ div class="w3-half"
     .w3-button[onclick="destroySelected('is_done0')"]
       | Delete selected
   - @tasks.each do |task|
-    - if task.is_done == 0
+    - if task.is_done == false
       .w3-dropdown-click
         button onclick="dropDown(#{task.id})" class="w3-button #{color_of_priority(task.priority)}" style="min-width: 200px"
           = check_box_tag(task.id, 0, false, {class: "w3-left w3-margin-right is_done0", style: "height: 20px"})
@@ -45,7 +45,7 @@ div class="w3-half"
     .w3-button[onclick="destroySelected('is_done1')"]
       | Delete selected
   - @tasks.each do |task|
-    - if task.is_done == 1
+    - if task.is_done == true
       .w3-dropdown-click
         button onclick="dropDown(#{task.id})" class="w3-button #{color_of_priority(task.priority)}" style="min-width: 200px"
           = check_box_tag(task.id, 0, false, {class: "w3-left w3-margin-right is_done1", style: "height: 20px"})

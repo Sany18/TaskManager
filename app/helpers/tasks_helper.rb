@@ -3,7 +3,7 @@ module TasksHelper
 
   def date_now
     r = Time.now
-    "#{self.check_zero(r.year)}-#{self.check_zero(r.month)}-#{r.day}"
+    "#{r.year}-#{self.check_zero(r.month)}-#{self.check_zero(r.day)}"
   end
 
   def check_zero num

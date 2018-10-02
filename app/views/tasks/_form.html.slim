@@ -27,8 +27,6 @@ div class="w3-container" style="width: 40vw"
       = form.label :"Deadline"
       br
       = form.number_field :term, id: :task_term, type: :date, min: date_now, value: date_now, required: :"", class: "w3-input w3-border w3-round-large"
-    .hidden[style="visibility: hidden"]
-      = form.number_field :user_id, value: current_user.id
     input.w3-button.w3-teal[type="submit" value="Save"]
     .w3-button.w3-teal
       = link_to 'Go back', tasks_path

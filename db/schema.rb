@@ -20,10 +20,11 @@ ActiveRecord::Schema.define(version: 2018_09_23_083318) do
     t.string "theme"
     t.integer "priority"
     t.datetime "term"
-    t.integer "user_id"
-    t.integer "is_done", default: 0
+    t.boolean "is_done", default: false
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
