@@ -1,19 +1,11 @@
 class TasksController < ApplicationController
-  skip_before_action :verify_authenticity_token
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # GET /tasks
   # GET /task.json
   def index
-    if user_signed_in?
-      @tasks = current_user.tasks
-      @self = self
-    else
-      respond_to do |page|
-        page.html {redirect_to new_user_session_path, notice: "You need to sign in first."}
-      end
-    end
+    @tasks = current_user.tasks
   end
 
   # GET /task/1
