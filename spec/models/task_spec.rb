@@ -4,43 +4,19 @@ RSpec.describe Task, type: :model do
   describe "model:" do
     context "without a" do
       it "title" do
-        task = Task.new(title: nil,
-                        theme: "asd",
-                        priority: "1",
-                        term: "1234-12-12",
-                        user_id: 1)
+        task = build(:task, title: nil)
         expect(task).to_not be_valid
       end
-      it "last_name" do
-        task = Task.new(title: "a",
-                        theme: nil,
-                        priority: "1",
-                        term: "1234-12-12",
-                        user_id: 1)
+      it "theme" do
+        task = build(:task, theme: nil)
         expect(task).to_not be_valid
       end
-      it "email" do
-        task = Task.new(title: "a",
-                        theme: "asd",
-                        priority: nil,
-                        term: "1234-12-12",
-                        user_id: 1)
+      it "priority" do
+        task = build(:task, priority: nil)
         expect(task).to_not be_valid
       end
-      it "password" do
-        task = Task.new(title: "a",
-                        theme: "asd",
-                        priority: "1",
-                        term: nil,
-                        user_id: 1)
-        expect(task).to_not be_valid
-      end
-      it "password" do
-        task = Task.new(title: "a",
-                        theme: "asd",
-                        priority: "1",
-                        term: "1234-12-12",
-                        user_id: nil)
+      it "user_id" do
+        task = build(:task, user_id: nil)
         expect(task).to_not be_valid
       end
     end
@@ -51,8 +27,3 @@ RSpec.describe Task, type: :model do
     end
   end
 end
-
-# context 'validation' do
-#   let(:user) { create(:user) }
-#   it { expect(user).to be_valid }
-# end

@@ -11,12 +11,11 @@ end
 
 FactoryBot.define do
   factory :task do
-    id {1}
-    title {'task'}
-    theme {'theme'}
-    priority {'3'}
-    term {'1234-12-12'}
-    user_id {1}
-    is_done {0}
+    id {Faker::Number.number(5)}
+    title {Faker::Job.title}
+    theme {Faker::Hacker.say_something_smart}
+    priority {rand(0..5)}
+    term {Date.today}
+    user_id {Faker::Number.number(1)}
   end
 end
