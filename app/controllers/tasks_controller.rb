@@ -34,6 +34,7 @@ class TasksController < ApplicationController
   # POST /task.json
   def create
     @task = Task.new(task_params)
+    @task[:user_id] = current_user.id
 
     respond_to do |format|
       if @task.save
@@ -70,7 +71,7 @@ class TasksController < ApplicationController
     end
   end
 
-  # DELETE /task/delete_selected/1
+  # DELETE /task/delete_selected/:id
   def destroy_selected
     params[:id].split("%").map do |id|
       task = Task.find_by(id: id)
@@ -83,14 +84,14 @@ class TasksController < ApplicationController
     end
   end
 
-  #GET /task/status_switch/1
+  #GET /task/status_switch/:id
   def status_switch
     id = params[:id]
     task = Task.find_by(id: id)
-    if task.is_done == 0
-      task.update(is_done: 1)
+    if task.is_done == false
+      task.update(is_done: true)
     else
-      task.update(is_done: 0)
+      task.update(is_done: false)
     end
 
     respond_to do |format|
@@ -108,6 +109,6 @@ class TasksController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def task_params
-    params.require(:task).permit(:title, :theme, :priority, :term, :user_id, :is_done)
+    params.require(:task).permit(:title, :theme, :priority, :term, :is_done)
   end
 end

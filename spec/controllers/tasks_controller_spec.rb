@@ -41,6 +41,10 @@ RSpec.describe TasksController, type: :controller do
       get :new
       expect(response).to have_http_status(200)
     end
+    it "should have " do
+      get :new
+      expect(assigns(:task)).to be_a_new(Task)
+    end
   end
 
   # GET /task/1/edit

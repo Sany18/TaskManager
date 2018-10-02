@@ -7,9 +7,7 @@ FactoryBot.define do
     password_confirmation {"password"}
     confirmed_at {Date.today}
   end
-end
 
-FactoryBot.define do
   factory :task do
     id {Faker::Number.number(5)}
     title {Faker::Job.title}
