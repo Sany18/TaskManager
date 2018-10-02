@@ -28,7 +28,7 @@ div class="w3-half"
         div id="dropList#{task.id}" class="w3-dropdown-content w3-bar-block w3-border" style="min-width: 400px"
           .w3-bar-item.w3-button.blacklink.w3-light-green
             = link_to "Done", ["task", "status_switch", task.id] * '/'
-          .w3-bar-item Make up to: #{task.term}
+          .w3-bar-item Make up to: #{task.due_date}
           .w3-bar-item.w3-button #{task.theme}
           .w3-bar-item.w3-button.blacklink
             = link_to "Show", task
@@ -54,7 +54,7 @@ div class="w3-half"
         .w3-dropdown-content.w3-bar-block.w3-border id="dropList#{task.id}" style="min-width: 400px"
           .w3-bar-item.w3-button.blacklink.w3-gray
             = link_to "Not done", ["task", "status_switch", task.id] * '/'
-          .w3-bar-item Make up to: #{task.term}
+          .w3-bar-item Make up to: #{task.due_date}
           .w3-bar-item.w3-button #{task.theme}
           .w3-bar-item.w3-button.blacklink
             = link_to "Show", task

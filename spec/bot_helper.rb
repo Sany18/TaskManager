@@ -13,7 +13,7 @@ FactoryBot.define do
     title {Faker::Job.title}
     theme {Faker::Hacker.say_something_smart}
     priority {rand(0..5)}
-    term {Date.today}
+    due_date {Date.today}
     user_id {Faker::Number.number(1)}
   end
 end

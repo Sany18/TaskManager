@@ -1,3 +1,3 @@
 class Task < ApplicationRecord
-  validates_presence_of :title, :theme, :priority, :term, :user_id
+  validates_presence_of :title, :theme, :priority, :due_date, :user_id
 end

@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2018_09_23_083318) do
     t.string "title"
     t.string "theme"
     t.integer "priority"
-    t.datetime "term"
+    t.datetime "due_date"
     t.boolean "is_done", default: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
