@@ -6,10 +6,8 @@ html
     = csp_meta_tag
     = stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag  href="https://www.w3schools.com/w3css/4/w3.css"
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'
-  body.w3-sand[onloan="onload()"]
+    = javascript_include_tag 'application'
+  body.w3-sand
     = yield
     .w3-container.w3-bottom.w3-light-grey
-      p
-        | Nothing
+      p Nothing
