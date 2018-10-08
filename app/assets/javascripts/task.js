@@ -31,7 +31,6 @@ jQuery(document).ready(function () {
 
   //Для динамически созданных элементов
   $(document).on('click', '.close_new_task', () => {
-    console.log('ble');
     $("#new_task").css("display", "none").html("");
   });
 
@@ -63,7 +62,7 @@ jQuery(document).ready(function () {
     }
   });
 
-  $(".slider").on("input change", () => {
+  $(document).on("input change", ".slider", () => {
     let slider = $(".slider");
     let value = slider.val();
     let output = $("#show_value");
@@ -115,6 +114,7 @@ jQuery(document).ready(function () {
       type: 'DELETE',
       success: function (result) {
         window.location = "/";
+        $('#notice').html("Selected tasks deleted.");
       }
     })
   }

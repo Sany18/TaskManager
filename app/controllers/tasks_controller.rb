@@ -30,7 +30,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html {redirect_to @task, notice: "Task created."}
+        format.html {redirect_to '/', notice: "Task created."}
         format.json {render :show, status: :created, location: @task}
       else
         format.html {render :new}
@@ -44,7 +44,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html {redirect_to @task, notice: "Task updated."}
+        format.html {redirect_to '/', notice: "Task updated."}
         format.json {render :show, status: :ok, location: @task}
       else
         format.html {render :edit}
@@ -68,11 +68,6 @@ class TasksController < ApplicationController
     params[:id].split("%").map do |id|
       task = Task.find_by(id: id)
       task.destroy
-    end
-
-    respond_to do |format|
-      format.html {redirect_to "/", notice: "Selected tasks deleted."}
-      format.json {head :no_content}
     end
   end
 
