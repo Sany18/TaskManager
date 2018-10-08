@@ -5,7 +5,7 @@ header.w3-container.w3-light-grey
 .w3-container.w3-teal
   p#notice #{notice}
 .w3-bar.w3-black.w3-large
-  .w3-bar-item.w3-button.new_task New task
+  .w3-bar-item.w3-button.new_task_button New task
   .w3-bar-item.w3-button.w3-right
     = link_to "Exit", destroy_user_session_path, method: :delete
   .w3-bar-item.w3-right Hello, #{current_user.first_name}. Not you?

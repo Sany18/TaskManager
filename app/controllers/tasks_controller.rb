@@ -16,6 +16,7 @@ class TasksController < ApplicationController
   # GET /task/new
   def new
     @task = current_user.tasks.new
+    render layout: false
   end
 
   # GET /task/1/edit

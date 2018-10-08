@@ -1,4 +1,4 @@
-$(document).ready(function () {
+jQuery(document).ready(function () {
   var HEROKUROOT = "";
 
   $(".checkboxes_set_all_0").click(() => {
@@ -29,15 +29,16 @@ $(document).ready(function () {
     }
   });
 
-  $(".close_new_task").click(() => {
+  //Для динамически созданных элементов
+  $(document).on('click', '.close_new_task', () => {
+    console.log('ble');
     $("#new_task").css("display", "none").html("");
   });
 
-  $(".new_task").click(() => {
+  $(".new_task_button").click(() => {
     var notice = $('#notice');
     var new_task_div = $("#new_task");
 
-    console.log(new_task_div.css("display"));
     if (new_task_div.css("display") === "none") {
       notice.html("Wait");
       var w = setInterval(() => {
@@ -94,7 +95,6 @@ $(document).ready(function () {
   $(".destroy_selected_1").click(() => {
     destroy_selected(".checkbox_belongs_1")
   });
-
 
   function destroy_selected(checkboxes_class) {
     var path = HEROKUROOT + "/task/delete_selected/";
