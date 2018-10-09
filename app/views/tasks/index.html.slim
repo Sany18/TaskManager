@@ -15,7 +15,7 @@ div class="w3-half"
       | Unfinished tasks:
     .w3-button
       = label_tag(:pick_all, "Select all ")
-      = check_box_tag :pick_all, 0, false, {class: "checkboxes_set_all_0"}
+      = check_box_tag :pick_all, 0, false, {id: "checkboxes_set_all_0"}
     .w3-button[class="destroy_selected_0"]
       | Delete selected
   - @tasks.each do |task|
@@ -41,7 +41,7 @@ div class="w3-half"
       | Finished:
     .w3-button
       = label_tag(:pick_all, "Select all ")
-      = check_box_tag :pick_all, 0, false, {class: "checkboxes_set_all_1"}
+      = check_box_tag :pick_all, 0, false, {id: "checkboxes_set_all_1"}
     .w3-button[class="destroy_selected_1"]
       | Delete selected
   - @tasks.each do |task|

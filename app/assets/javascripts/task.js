@@ -1,17 +1,15 @@
 jQuery(document).ready(function () {
-  var HEROKUROOT = "";
-
-  $(".checkboxes_set_all_0").click(() => {
+  $("#checkboxes_set_all_0").click(() => {
     change_checkboxes(".checkbox_belongs_0")
   });
-  $(".checkboxes_set_all_1").click(() => {
+  $("#checkboxes_set_all_1").click(() => {
     change_checkboxes(".checkbox_belongs_1")
   });
 
   function change_checkboxes(checkboxes_class) {
     var items = $(checkboxes_class);
     for (let i = 0; i < items.length; i++) {
-      if (items[i].checked != true) {
+      if (!items[i].checked) {
         items[i].checked = true;
       } else {
         items[i].checked = false;
@@ -22,11 +20,7 @@ jQuery(document).ready(function () {
   $(".drop_down").click((x = $(this)) => {
     curent_list = x.currentTarget.className.replace("w3-dropdown-click drop_down ", "");
     var button = $("#" + curent_list);
-    if (button.hasClass("w3-show") === false) {
-      button.addClass("w3-show");
-    } else {
-      button.removeClass("w3-show");
-    }
+    button.toggleClass("w3-show");
   });
 
   //Для динамически созданных элементов
@@ -44,7 +38,7 @@ jQuery(document).ready(function () {
         notice.html(notice.text() + ".")
       }, 250);
 
-      $.get(HEROKUROOT + '/tasks/new')
+      $.get('/tasks/new')
         .done((data) => {
           new_task_div.html(data).css("display", "block");
         })
@@ -96,10 +90,10 @@ jQuery(document).ready(function () {
   });
 
   function destroy_selected(checkboxes_class) {
-    var path = HEROKUROOT + "/task/delete_selected/";
+    var path = "/task/delete_selected/";
     var items = $(checkboxes_class);
     for (let i = 0; i < items.length; i++) {
-      if (items[i].checked == true) {
+      if (items[i].checked) {
         path += items[i].id + "%";
       }
     }
@@ -112,7 +106,7 @@ jQuery(document).ready(function () {
     $.ajax({
       url: path,
       type: 'DELETE',
-      success: function (result) {
+      success: function () {
         window.location = "/";
         $('#notice').html("Selected tasks deleted.");
       }
