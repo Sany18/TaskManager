@@ -92,23 +92,35 @@ jQuery(document).ready(function () {
   function destroy_selected(checkboxes_class) {
     var path = "/task/delete_selected/";
     var items = $(checkboxes_class);
+    var notice = $('#notice');
+
     for (let i = 0; i < items.length; i++) {
       if (items[i].checked) {
         path += items[i].id + "%";
       }
     }
-    var notice = $('#notice');
-    notice.innerHTML = "Wait";
+
+    notice.html("Wait");
     var w = setInterval(() => {
-      notice.innerHTML = notice.innerHTML + ".";
+      notice.html(notice.text() + ".");
     }, 250);
 
     $.ajax({
       url: path,
       type: 'DELETE',
       success: function () {
-        window.location = "/";
+        for (let i = 0; i < items.length; i++) {
+          if (items[i].checked) {
+            let id = items[i].id;
+            $(".drop_list" + id).remove();
+            clearInterval(w);
+          }
+        }
         $('#notice').html("Selected tasks deleted.");
+      },
+      error: (xhr, ajaxOptions, thrownError) => {
+        clearInterval(w);
+        $('#notice').html("Delete file:" + thrownError);
       }
     })
   }
