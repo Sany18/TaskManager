@@ -66,8 +66,7 @@ class TasksController < ApplicationController
   # DELETE /task/delete_selected/:id
   def destroy_selected
     params[:id].split("%").map do |id|
-      task = Task.find_by(id: id)
-      task.destroy
+      current_user.tasks.find_by(id: id).destroy
     end
   end
 

@@ -33,8 +33,8 @@ div class="w3-half"
             = link_to "Show", task
           .w3-bar-item.w3-button.blacklink
             = link_to "Edit", edit_task_path(task)
-          .w3-bar-item.w3-button.blacklink
-            = link_to "Delete", task, method: :delete, data: {confirm: "Delete?"}
+          .w3-bar-item.w3-button.blacklink[onclick="$(this).delete_task('#{task.id}')"]
+            | Delete
 div class="w3-half"
   .w3-teal.w3-padding
     .w3-large[style="display: inline"]
@@ -59,6 +59,6 @@ div class="w3-half"
             = link_to "Show", task
           .w3-bar-item.w3-button.blacklink
             = link_to "Edit", edit_task_path(task)
-          .w3-bar-item.w3-button.blacklink
-            = link_to "Delete", task, method: :delete, data: {confirm: "Are you sure?"}
+          .w3-bar-item.w3-button.blacklink[onclick="$(this).delete_task('#{task.id}')"]
+            | Delete
 #new_task

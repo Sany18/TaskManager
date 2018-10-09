@@ -82,6 +82,22 @@ jQuery(document).ready(function () {
     }
   }
 
+  $.fn.delete_task = (id) => {
+    var path = "/task/delete_selected/" + id;
+
+    $.ajax({
+      url: path,
+      type: 'DELETE',
+      success: function () {
+        $(".drop_list" + id).remove();
+        $('#notice').html("Task deleted");
+      },
+      error: (xhr, ajaxOptions, thrownError) => {
+        $('#notice').html("Delete failed: " + thrownError);
+      }
+    })
+  };
+
   $(".destroy_selected_0").click(() => {
     destroy_selected(".checkbox_belongs_0")
   });
@@ -120,7 +136,7 @@ jQuery(document).ready(function () {
       },
       error: (xhr, ajaxOptions, thrownError) => {
         clearInterval(w);
-        $('#notice').html("Delete file:" + thrownError);
+        $('#notice').html("Delete failed: " + thrownError);
       }
     })
   }
