@@ -1,15 +1,4 @@
 jQuery(document).ready(function () {
-  function changeCheckboxes(checkboxes_class) {
-    var items = $(checkboxes_class);
-    for (let i = 0; i < items.length; i++) {
-      if (!items[i].checked) {
-        items[i].checked = true;
-      } else {
-        items[i].checked = false;
-      }
-    }
-  }
-
   $(".drop_down").click((current_task_btn = $(this)) => {
     var dropdown_current_task_width_id = current_task_btn.currentTarget.className.replace("w3-dropdown-click drop_down ", "");
     $("#" + dropdown_current_task_width_id).toggleClass("w3-show");
@@ -163,10 +152,10 @@ jQuery(document).ready(function () {
   });
 
   $("#checkbox_set_all_not_completed").click(() => {
-    changeCheckboxes(".checkbox_belongs_not_completed")
+    $(".checkbox_belongs_not_completed").prop("checked", $("#checkbox_set_all_not_completed").prop("checked"));
   });
   $("#checkbox_set_all_completed").click(() => {
-    changeCheckboxes(".checkbox_belongs_completed")
+    $(".checkbox_belongs_completed").prop("checked", $("#checkbox_set_all_completed").prop("checked"));
   });
 
   //Для динамически созданных элементов
