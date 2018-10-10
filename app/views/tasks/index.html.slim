@@ -15,14 +15,14 @@ div class="w3-half"
       | Unfinished tasks:
     .w3-button
       = label_tag(:pick_all, "Select all ")
-      = check_box_tag :pick_all, 0, false, {id: "checkboxes_set_all_0"}
-    .w3-button[class="destroy_selected_0"]
+      = check_box_tag :pick_all, 0, false, {id: "checkboxes_set_all_not_completed"}
+    .w3-button[class="destroy_selected_not_completed"]
       | Delete selected
   - @tasks.each do |task|
     - if task.is_done == false
       .w3-dropdown-click.drop_down[class="drop_list#{task.id}"]
         button class="w3-button #{color_of_priority(task.priority)}" style="min-width: 200px"
-          = check_box_tag(task.id, 0, false, {class: "w3-left w3-margin-right checkbox_belongs_0", style: "height: 20px"})
+          = check_box_tag(task.id, 0, false, {class: "w3-left w3-margin-right checkbox_belongs_not_completed", style: "height: 20px"})
           = task.title
         .w3-dropdown-content.w3-bar-block.w3-border id="drop_list#{task.id}" style="min-width: 400px"
           .w3-bar-item.w3-button.blacklink.w3-gray
@@ -41,14 +41,14 @@ div class="w3-half"
       | Finished:
     .w3-button
       = label_tag(:pick_all, "Select all ")
-      = check_box_tag :pick_all, 0, false, {id: "checkboxes_set_all_1"}
-    .w3-button[class="destroy_selected_1"]
+      = check_box_tag :pick_all, 0, false, {id: "checkboxes_set_all_completed"}
+    .w3-button[class="destroy_selected_completed"]
       | Delete selected
   - @tasks.each do |task|
     - if task.is_done == true
       .w3-dropdown-click.drop_down[class="drop_list#{task.id}"]
         button class="w3-button #{color_of_priority(task.priority)}" style="min-width: 200px"
-          = check_box_tag(task.id, 0, false, {class: "w3-left w3-margin-right checkbox_belongs_1", style: "height: 20px"})
+          = check_box_tag(task.id, 0, false, {class: "w3-left w3-margin-right checkbox_belongs_completed", style: "height: 20px"})
           = task.title
         .w3-dropdown-content.w3-bar-block.w3-border id="drop_list#{task.id}" style="min-width: 400px"
           .w3-bar-item.w3-button.blacklink.w3-gray

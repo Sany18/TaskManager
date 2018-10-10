@@ -1,11 +1,4 @@
 jQuery(document).ready(function () {
-  $("#checkboxes_set_all_0").click(() => {
-    change_checkboxes(".checkbox_belongs_0")
-  });
-  $("#checkboxes_set_all_1").click(() => {
-    change_checkboxes(".checkbox_belongs_1")
-  });
-
   function change_checkboxes(checkboxes_class) {
     var items = $(checkboxes_class);
     for (let i = 0; i < items.length; i++) {
@@ -17,18 +10,12 @@ jQuery(document).ready(function () {
     }
   }
 
-  $(".drop_down").click((x = $(this)) => {
-    curent_list = x.currentTarget.className.replace("w3-dropdown-click drop_down ", "");
-    var button = $("#" + curent_list);
-    button.toggleClass("w3-show");
+  $(".drop_down").click((current_task_btn = $(this)) => {
+    var current_task = current_task_btn.currentTarget.className.replace("w3-dropdown-click drop_down ", "");
+    $("#" + current_task).toggleClass("w3-show");
   });
 
-  //Для динамически созданных элементов
-  $(document).on('click', '.close_new_task', () => {
-    $("#new_task").css("display", "none").html("");
-  });
-
-  $(".new_task_button").click(() => {
+  function modalWindow_NewTask() {
     var notice = $('#notice');
     var new_task_div = $("#new_task");
 
@@ -54,7 +41,7 @@ jQuery(document).ready(function () {
       new_task_div.css("display", "none").html("");
       notice.html("");
     }
-  });
+  }
 
   $(document).on("input change", ".slider", () => {
     let slider = $(".slider");
@@ -97,13 +84,6 @@ jQuery(document).ready(function () {
       }
     })
   };
-
-  $(".destroy_selected_0").click(() => {
-    destroy_selected(".checkbox_belongs_0")
-  });
-  $(".destroy_selected_1").click(() => {
-    destroy_selected(".checkbox_belongs_1")
-  });
 
   function destroy_selected(checkboxes_class) {
     var path = "/task/delete_selected/";
@@ -166,4 +146,27 @@ jQuery(document).ready(function () {
       return !1;
     };
   })();
+
+  $(".new_task_button").click(() => {
+    modalWindow_NewTask();
+  });
+
+  $(".destroy_selected_not_completed").click(() => {
+    destroy_selected(".checkbox_belongs_not_completed")
+  });
+  $(".destroy_selected_completed").click(() => {
+    destroy_selected(".checkbox_belongs_completed")
+  });
+
+  $("#checkboxes_set_all_not_completed").click(() => {
+    change_checkboxes(".checkbox_belongs_not_completed")
+  });
+  $("#checkboxes_set_all_completed").click(() => {
+    change_checkboxes(".checkbox_belongs_completed")
+  });
+
+  //Для динамически созданных элементов
+  $(document).on('click', '.close_new_task', () => {
+    $("#new_task").css("display", "none").html("");
+  });
 });
