@@ -76,7 +76,7 @@ jQuery(document).ready(function () {
       url: path,
       type: 'DELETE',
       success: function () {
-        $(".drop_list" + id).remove();
+        $(".dropdown" + id).remove();
         $('#notice').html("Task deleted");
       },
       error: (xhr, ajaxOptions, thrownError) => {
@@ -92,7 +92,7 @@ jQuery(document).ready(function () {
 
     for (let i = 0; i < items.length; i++) {
       if (items[i].checked) {
-        path += items[i].id + "%";
+        path += items[i].id + "&";
       }
     }
 
@@ -101,6 +101,8 @@ jQuery(document).ready(function () {
       notice.html(notice.text() + ".");
     }, 250);
 
+    console.log(path);
+
     $.ajax({
       url: path,
       type: 'DELETE',
@@ -108,7 +110,7 @@ jQuery(document).ready(function () {
         for (let i = 0; i < items.length; i++) {
           if (items[i].checked) {
             let id = items[i].id;
-            $(".drop_list" + id).remove();
+            $(".dropdown" + id).remove();
             clearInterval(w);
           }
         }

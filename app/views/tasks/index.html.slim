@@ -20,11 +20,11 @@ div class="w3-half"
       | Delete selected
   - @tasks.each do |task|
     - if task.is_done == false
-      .w3-dropdown-click.drop_down[class="drop_list#{task.id}"]
+      .w3-dropdown-click.drop_down[class="dropdown#{task.id}"]
         button class="w3-button #{color_of_priority(task.priority)}" style="min-width: 200px"
           = check_box_tag(task.id, 0, false, {class: "w3-left w3-margin-right checkbox_belongs_not_completed", style: "height: 20px"})
           = task.title
-        .w3-dropdown-content.w3-bar-block.w3-border id="drop_list#{task.id}" style="min-width: 400px"
+        .w3-dropdown-content.w3-bar-block.w3-border id="dropdown#{task.id}" style="min-width: 400px"
           .w3-bar-item.w3-button.blacklink.w3-gray
             = link_to "Done", ["task", "status_switch", task.id] * '/'
           .w3-bar-item Make up to: #{task.due_date}
@@ -46,11 +46,11 @@ div class="w3-half"
       | Delete selected
   - @tasks.each do |task|
     - if task.is_done == true
-      .w3-dropdown-click.drop_down[class="drop_list#{task.id}"]
+      .w3-dropdown-click.drop_down[class="dropdown#{task.id}"]
         button class="w3-button #{color_of_priority(task.priority)}" style="min-width: 200px"
           = check_box_tag(task.id, 0, false, {class: "w3-left w3-margin-right checkbox_belongs_completed", style: "height: 20px"})
           = task.title
-        .w3-dropdown-content.w3-bar-block.w3-border id="drop_list#{task.id}" style="min-width: 400px"
+        .w3-dropdown-content.w3-bar-block.w3-border id="dropdown#{task.id}" style="min-width: 400px"
           .w3-bar-item.w3-button.blacklink.w3-gray
             = link_to "Not done", ["task", "status_switch", task.id] * '/'
           .w3-bar-item Make up to: #{task.due_date}
