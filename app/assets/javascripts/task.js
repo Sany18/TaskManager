@@ -1,5 +1,5 @@
 jQuery(document).ready(function () {
-  function change_checkboxes(checkboxes_class) {
+  function changeCheckboxes(checkboxes_class) {
     var items = $(checkboxes_class);
     for (let i = 0; i < items.length; i++) {
       if (!items[i].checked) {
@@ -11,15 +11,15 @@ jQuery(document).ready(function () {
   }
 
   $(".drop_down").click((current_task_btn = $(this)) => {
-    var current_task = current_task_btn.currentTarget.className.replace("w3-dropdown-click drop_down ", "");
-    $("#" + current_task).toggleClass("w3-show");
+    var dropdown_current_task_width_id = current_task_btn.currentTarget.className.replace("w3-dropdown-click drop_down ", "");
+    $("#" + dropdown_current_task_width_id).toggleClass("w3-show");
   });
 
   function modalWindow_NewTask() {
     var notice = $('#notice');
-    var new_task_div = $("#new_task");
+    var new_task_div = $("#new_task_div");
 
-    if (new_task_div.css("display") === "none") {
+    if (!new_task_div.is(":visible")) {
       notice.html("Wait");
       var w = setInterval(() => {
         notice.html(notice.text() + ".")
@@ -27,7 +27,7 @@ jQuery(document).ready(function () {
 
       $.get('/tasks/new')
         .done((data) => {
-          new_task_div.html(data).css("display", "block");
+          new_task_div.html(data).show(100);
         })
         .fail(() => {
           clearInterval(w);
@@ -38,7 +38,7 @@ jQuery(document).ready(function () {
           notice.html("");
         });
     } else {
-      new_task_div.css("display", "none").html("");
+      new_task_div.hide(100).html("");
       notice.html("");
     }
   }
@@ -69,7 +69,7 @@ jQuery(document).ready(function () {
     }
   }
 
-  $.fn.delete_task = (id) => {
+  $.fn.deleteTask = (id) => {
     var path = "/task/delete_selected/" + id;
 
     $.ajax({
@@ -85,7 +85,7 @@ jQuery(document).ready(function () {
     })
   };
 
-  function destroy_selected(checkboxes_class) {
+  function destroySelected(checkboxes_class) {
     var path = "/task/delete_selected/";
     var items = $(checkboxes_class);
     var notice = $('#notice');
@@ -147,26 +147,28 @@ jQuery(document).ready(function () {
     };
   })();
 
-  $(".new_task_button").click(() => {
+  $("#new_task_div").hide();
+
+  $("#new_task_button").click(() => {
     modalWindow_NewTask();
   });
 
-  $(".destroy_selected_not_completed").click(() => {
-    destroy_selected(".checkbox_belongs_not_completed")
+  $("#destroy_selected_not_completed_btn").click(() => {
+    destroySelected(".checkbox_belongs_not_completed")
   });
-  $(".destroy_selected_completed").click(() => {
-    destroy_selected(".checkbox_belongs_completed")
+  $("#destroy_selected_completed_btn").click(() => {
+    destroySelected(".checkbox_belongs_completed")
   });
 
-  $("#checkboxes_set_all_not_completed").click(() => {
-    change_checkboxes(".checkbox_belongs_not_completed")
+  $("#checkbox_set_all_not_completed").click(() => {
+    changeCheckboxes(".checkbox_belongs_not_completed")
   });
-  $("#checkboxes_set_all_completed").click(() => {
-    change_checkboxes(".checkbox_belongs_completed")
+  $("#checkbox_set_all_completed").click(() => {
+    changeCheckboxes(".checkbox_belongs_completed")
   });
 
   //Для динамически созданных элементов
-  $(document).on('click', '.close_new_task', () => {
-    $("#new_task").css("display", "none").html("");
+  $(document).on('click', '.close_new_task_btn', () => {
+    $("#new_task_div").css("display", "none").html("");
   });
 });

@@ -5,7 +5,7 @@ header.w3-container.w3-light-grey
 .w3-container.w3-teal
   p#notice #{notice}
 .w3-bar.w3-black.w3-large
-  .w3-bar-item.w3-button.new_task_button New task
+  .w3-bar-item.w3-button[id="new_task_button"] New task
   .w3-bar-item.w3-button.w3-right
     = link_to "Exit", destroy_user_session_path, method: :delete
   .w3-bar-item.w3-right Hello, #{current_user.first_name}. Not you?
@@ -15,8 +15,8 @@ div class="w3-half"
       | Unfinished tasks:
     .w3-button
       = label_tag(:pick_all, "Select all ")
-      = check_box_tag :pick_all, 0, false, {id: "checkboxes_set_all_not_completed"}
-    .w3-button[class="destroy_selected_not_completed"]
+      = check_box_tag :pick_all, 0, false, {id: "checkbox_set_all_not_completed"}
+    .w3-button[id="destroy_selected_not_completed_btn"]
       | Delete selected
   - @tasks.each do |task|
     - if task.is_done == false
@@ -33,7 +33,7 @@ div class="w3-half"
             = link_to "Show", task
           .w3-bar-item.w3-button.blacklink
             = link_to "Edit", edit_task_path(task)
-          .w3-bar-item.w3-button.blacklink[onclick="$(this).delete_task('#{task.id}')"]
+          .w3-bar-item.w3-button.blacklink[onclick="$(this).deleteTask('#{task.id}')"]
             | Delete
 div class="w3-half"
   .w3-teal.w3-padding
@@ -41,8 +41,8 @@ div class="w3-half"
       | Finished:
     .w3-button
       = label_tag(:pick_all, "Select all ")
-      = check_box_tag :pick_all, 0, false, {id: "checkboxes_set_all_completed"}
-    .w3-button[class="destroy_selected_completed"]
+      = check_box_tag :pick_all, 0, false, {id: "checkbox_set_all_completed"}
+    .w3-button[id="destroy_selected_completed_btn"]
       | Delete selected
   - @tasks.each do |task|
     - if task.is_done == true
@@ -59,6 +59,6 @@ div class="w3-half"
             = link_to "Show", task
           .w3-bar-item.w3-button.blacklink
             = link_to "Edit", edit_task_path(task)
-          .w3-bar-item.w3-button.blacklink[onclick="$(this).delete_task('#{task.id}')"]
+          .w3-bar-item.w3-button.blacklink[onclick="$(this).deleteTask('#{task.id}')"]
             | Delete
-#new_task
+#new_task_div
