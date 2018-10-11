@@ -1,121 +1,148 @@
-var HEROKUROOT = "";
+jQuery(document).ready(function () {
+  function showNewTaskForm() {
+    var notice = $('#notice');
+    var newTaskDiv = $("#new_task_div");
 
-function checkboxes_set_all(status) {
-  var items = document.getElementsByClassName(status);
-  for (let i = 0; i < items.length; i++) {
-    if (items[i].checked != true) {
-      items[i].checked = true;
+    if (!newTaskDiv.is(":visible")) {
+      notice.html("Wait");
+      var w = setInterval(() => {
+        notice.html(notice.text() + ".")
+      }, 250);
+
+      $.get('/tasks/new')
+        .done((data) => {
+          newTaskDiv.html(data).show(100);
+        })
+        .fail(() => {
+          clearInterval(w);
+          notice.html("We have some problem");
+        })
+        .always(() => {
+          clearInterval(w);
+          notice.html("");
+        });
     } else {
-      items[i].checked = false;
+      newTaskDiv.hide(100).html("");
+      notice.html("");
     }
   }
-}
 
-function dropDown(id) {
-  var x = document.getElementById("dropList" + id);
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-  } else {
-    x.className = x.className.replace(" w3-show", "");
+  function showPriorityInColor() {
+    let slider = $(".slider");
+    let value = slider.val();
+    $("#show_value").html(value);
+    slider.css("background-color", getColor(value));
+    console.log("Hello, mr. " + getColor(value));
   }
-}
 
-function newTask() {
-  var notice = document.getElementById('notice');
-  notice.innerHTML = "Wait";
-  var w = setInterval(() => {
-    notice.innerHTML = notice.innerHTML + ".";
-  }, 250);
-  var z = document.getElementById("newTask");
-  if (z.innerHTML == "") {
-    console.log('im work');
-    var myInit = {
-      method: 'GET',
-      credentials: 'include'
-    };
-    fetch(HEROKUROOT + '/tasks/new', myInit)
-      .then(function (address) {
-        return address.text();
-      })
-      .then(function (body) {
-        z.innerHTML = body;
+  function getColor(id) {
+    switch (+id) {
+      case 1:
+        return "Lightgreen";
+      case 2:
+        return "Green";
+      case 3:
+        return "Yellow";
+      case 4:
+        return "Orange";
+      case 5:
+        return "Orangered";
+      default:
+        return "Green";
+    }
+  }
+
+  function deleteTask(currentTaskBtn) {
+    let taskId = currentTaskBtn.currentTarget.id.replace('delete_task_id:', '');
+    let path = "/task/delete_selected/" + taskId;
+
+    $.ajax({
+      url: path,
+      type: 'DELETE',
+      success: function () {
+        $(".dropdown" + taskId).remove();
+        $('#notice').html("Task deleted");
+      },
+      error: (xhr, ajaxOptions, thrownError) => {
+        $('#notice').html("Delete failed: " + thrownError);
+      }
+    })
+  }
+
+  function destroySelected(checkboxes_class) {
+    var path = "/task/delete_selected/";
+    var checkedTask = $(checkboxes_class + ":checked");
+    var notice = $('#notice');
+
+    for (let i = 0; i < checkedTask.length; i++) {
+      path += checkedTask[i].id + "&";
+    }
+
+    notice.html("Wait");
+    var w = setInterval(() => {
+      notice.html(notice.text() + ".");
+    }, 250);
+
+    $.ajax({
+      url: path,
+      type: 'DELETE',
+      success: function () {
+        for (let i = 0; i < checkedTask.length; i++) {
+          let id = checkedTask[i].id;
+          $(".dropdown" + id).remove();
+          clearInterval(w);
+        }
+        $('#notice').html("Selected tasks deleted.");
+      },
+      error: (xhr, ajaxOptions, thrownError) => {
         clearInterval(w);
-        notice.innerHTML = "";
-      });
-  } else {
-    z.innerHTML = "";
-    clearInterval(w);
-    notice.innerHTML = "";
+        $('#notice').html("Delete failed: " + thrownError);
+      }
+    })
   }
-}
 
-function showValue(value) {
-  var output = document.getElementById("showValue");
-  output.innerHTML = value;
-  output.style.backgroundColor = getColor(value);
-  console.log("Hello, mr. " + getColor(value));
-}
-
-function getColor(id) {
-  switch (+id) {
-    case 1:
-      return "Lightgreen";
-    case 2:
-      return "Green";
-    case 3:
-      return "Yellow";
-    case 4:
-      return "Orange";
-    case 5:
-      return "Orangered";
-    default:
-      return "Green";
+  function showTask(dropdownTaskBtn) {
+    var dropdownCurrentTaskWidthId = dropdownTaskBtn.currentTarget.className.replace("w3-dropdown-click drop_down_btn ", "");
+    $("#" + dropdownCurrentTaskWidthId).toggleClass("w3-show");
   }
-}
 
-function destroySelected(status) {
-  var path = HEROKUROOT + "/task/delete_selected/";
-  var myInit = {
-    method: 'DELETE',
-    credentials: 'include'
-  };
-  var items = document.getElementsByClassName(status);
-  for (let i = 0; i < items.length; i++) {
-    if (items[i].checked == true) {
-      path += items[i].id + "%";
-    }
-  }
-  var notice = document.getElementById('notice');
-  notice.innerHTML = "Wait";
-  var w = setInterval(() => {
-    notice.innerHTML = notice.innerHTML + ".";
-  }, 250);
-  fetch(path, myInit)
-    .then(() => window.location = "/");
-}
 
-window.onload = function () {
-  var buttonMove = document.getElementById("kittien");
-  buttonMove.onmousedown = function (a) {
-    function b(a) {
-      buttonMove.style.top = a.pageY - c + "px";
-      buttonMove.style.left = a.pageX - d + "px";
-    }
+  $(".drop_down_btn").click((dropdownTaskBtn = $(this)) => {
+    showTask(dropdownTaskBtn)
+  });
 
-    var c = a.pageY - buttonMove.getBoundingClientRect().top + pageYOffset,
-      d = a.pageX - buttonMove.getBoundingClientRect().left + pageXOffset;
-    buttonMove.style.position = "absolute";
-    buttonMove.style.position = "fixed";
-    b(a);
-    document.onmousemove = function (a) {
-      b(a);
-    };
-    window.onmouseup = function () {
-      document.onmousemove = null;
-      buttonMove.onmouseup = null;
-    }
-  };
-  buttonMove.ondragstart = function () {
-    return !1;
-  };
-};
+  $(".delete_current_task").click((deleteTaskBtn = $(this)) => {
+    deleteTask(deleteTaskBtn)
+  });
+
+  $("#new_task_div").hide();
+
+  $("#new_task_button").click(() => {
+    showNewTaskForm();
+  });
+
+  $("#destroy_selected_not_completed_btn").click(() => {
+    destroySelected(".checkbox_belongs_not_completed")
+  });
+
+  $("#destroy_selected_completed_btn").click(() => {
+    destroySelected(".checkbox_belongs_completed")
+  });
+
+  $("#checkbox_set_all_not_completed").click(() => {
+    $(".checkbox_belongs_not_completed").prop("checked", $("#checkbox_set_all_not_completed").prop("checked"));
+  });
+
+  $("#checkbox_set_all_completed").click(() => {
+    $(".checkbox_belongs_completed").prop("checked", $("#checkbox_set_all_completed").prop("checked"));
+  });
+
+//Для динамически созданных элементов
+  $(document).on("input change", ".slider", () => {
+    showPriorityInColor()
+  });
+
+  $(document).on('click', '.close_new_task_btn', () => {
+    $("#new_task_div").hide(100).html("")
+  });
+});
