@@ -1,9 +1,4 @@
 jQuery(document).ready(function () {
-  function showTask(current_task_btn) {
-    var dropdown_current_task_width_id = current_task_btn.currentTarget.className.replace("w3-dropdown-click drop_down ", "");
-    $("#" + dropdown_current_task_width_id).toggleClass("w3-show");
-  }
-
   function showNewTaskForm() {
     var notice = $('#notice');
     var newTaskDiv = $("#new_task_div");
@@ -57,21 +52,22 @@ jQuery(document).ready(function () {
     }
   }
 
-  $.fn.deleteTask = (id) => {
-    var path = "/task/delete_selected/" + id;
+  function deleteTask(current_task) {
+    let taskId = current_task.currentTarget.id.replace('delete_task_id', '');
+    var path = "/task/delete_selected/" + taskId;
 
     $.ajax({
       url: path,
       type: 'DELETE',
       success: function () {
-        $(".dropdown" + id).remove();
+        $(".dropdown" + taskId).remove();
         $('#notice').html("Task deleted");
       },
       error: (xhr, ajaxOptions, thrownError) => {
         $('#notice').html("Delete failed: " + thrownError);
       }
     })
-  };
+  }
 
   function destroySelected(checkboxes_class) {
     var path = "/task/delete_selected/";
@@ -88,8 +84,6 @@ jQuery(document).ready(function () {
     var w = setInterval(() => {
       notice.html(notice.text() + ".");
     }, 250);
-
-    console.log(path);
 
     $.ajax({
       url: path,
@@ -136,10 +130,19 @@ jQuery(document).ready(function () {
       return !1;
     };
   })();
-  
 
-  $(".drop_down_btn").click(() => {
-    showTask($(this))
+  function showTask(dropdownTaskBtn) {
+    var dropdownCurrentTaskWidthId = dropdownTaskBtn.currentTarget.className.replace("w3-dropdown-click drop_down_btn ", "");
+    $("#" + dropdownCurrentTaskWidthId).toggleClass("w3-show");
+  }
+
+
+  $(".drop_down_btn").click((dropdownTaskBtn = $(this)) => {
+    showTask(dropdownTaskBtn)
+  });
+
+  $(".delete_current_task").click((deleteTaskBtn = $(this)) => {
+    deleteTask(deleteTaskBtn)
   });
 
   $("#new_task_div").hide();
