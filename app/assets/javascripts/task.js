@@ -101,32 +101,6 @@ jQuery(document).ready(function () {
     })
   }
 
-  (() => {
-    var buttonMove = document.getElementById("kittien");
-    buttonMove.onmousedown = function (a) {
-      function b(a) {
-        buttonMove.style.top = a.pageY - c + "px";
-        buttonMove.style.left = a.pageX - d + "px";
-      }
-
-      var c = a.pageY - buttonMove.getBoundingClientRect().top + pageYOffset,
-        d = a.pageX - buttonMove.getBoundingClientRect().left + pageXOffset;
-      buttonMove.style.position = "absolute";
-      buttonMove.style.position = "fixed";
-      b(a);
-      document.onmousemove = function (a) {
-        b(a);
-      };
-      window.onmouseup = function () {
-        document.onmousemove = null;
-        buttonMove.onmouseup = null;
-      }
-    };
-    buttonMove.ondragstart = function () {
-      return !1;
-    };
-  })();
-
   function showTask(dropdownTaskBtn) {
     var dropdownCurrentTaskWidthId = dropdownTaskBtn.currentTarget.className.replace("w3-dropdown-click drop_down_btn ", "");
     $("#" + dropdownCurrentTaskWidthId).toggleClass("w3-show");
