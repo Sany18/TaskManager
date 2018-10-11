@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2018_10_02_150318) do
     t.string "title"
     t.string "theme"
     t.integer "priority"
-    t.datetime "due_date"
+    t.datetime "term"
     t.boolean "is_done", default: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2018_10_02_150318) do
     t.datetime "confirmation_sent_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
