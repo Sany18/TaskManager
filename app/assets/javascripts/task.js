@@ -1,14 +1,14 @@
 jQuery(document).ready(function () {
-  $(".drop_down").click((current_task_btn = $(this)) => {
+  function showTask(current_task_btn) {
     var dropdown_current_task_width_id = current_task_btn.currentTarget.className.replace("w3-dropdown-click drop_down ", "");
     $("#" + dropdown_current_task_width_id).toggleClass("w3-show");
-  });
+  }
 
-  function modalWindow_NewTask() {
+  function showNewTaskForm() {
     var notice = $('#notice');
-    var new_task_div = $("#new_task_div");
+    var newTaskDiv = $("#new_task_div");
 
-    if (!new_task_div.is(":visible")) {
+    if (!newTaskDiv.is(":visible")) {
       notice.html("Wait");
       var w = setInterval(() => {
         notice.html(notice.text() + ".")
@@ -16,7 +16,7 @@ jQuery(document).ready(function () {
 
       $.get('/tasks/new')
         .done((data) => {
-          new_task_div.html(data).show(100);
+          newTaskDiv.html(data).show(100);
         })
         .fail(() => {
           clearInterval(w);
@@ -27,19 +27,18 @@ jQuery(document).ready(function () {
           notice.html("");
         });
     } else {
-      new_task_div.hide(100).html("");
+      newTaskDiv.hide(100).html("");
       notice.html("");
     }
   }
 
-  $(document).on("input change", ".slider", () => {
+  function showPriorityInColor() {
     let slider = $(".slider");
     let value = slider.val();
-    let output = $("#show_value");
-    output.html(value);
+    $("#show_value").html(value);
     slider.css("background-color", getColor(value));
     console.log("Hello, mr. " + getColor(value));
-  });
+  }
 
   function getColor(id) {
     switch (+id) {
@@ -137,16 +136,22 @@ jQuery(document).ready(function () {
       return !1;
     };
   })();
+  
+
+  $(".drop_down_btn").click(() => {
+    showTask($(this))
+  });
 
   $("#new_task_div").hide();
 
   $("#new_task_button").click(() => {
-    modalWindow_NewTask();
+    showNewTaskForm();
   });
 
   $("#destroy_selected_not_completed_btn").click(() => {
     destroySelected(".checkbox_belongs_not_completed")
   });
+
   $("#destroy_selected_completed_btn").click(() => {
     destroySelected(".checkbox_belongs_completed")
   });
@@ -154,12 +159,17 @@ jQuery(document).ready(function () {
   $("#checkbox_set_all_not_completed").click(() => {
     $(".checkbox_belongs_not_completed").prop("checked", $("#checkbox_set_all_not_completed").prop("checked"));
   });
+
   $("#checkbox_set_all_completed").click(() => {
     $(".checkbox_belongs_completed").prop("checked", $("#checkbox_set_all_completed").prop("checked"));
   });
 
-  //Для динамически созданных элементов
+//Для динамически созданных элементов
+  $(document).on("input change", ".slider", () => {
+    showPriorityInColor()
+  });
+
   $(document).on('click', '.close_new_task_btn', () => {
-    $("#new_task_div").css("display", "none").html("");
+    $("#new_task_div").hide(100).html("")
   });
 });
