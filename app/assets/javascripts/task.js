@@ -52,9 +52,9 @@ jQuery(document).ready(function () {
     }
   }
 
-  function deleteTask(current_task) {
-    let taskId = current_task.currentTarget.id.replace('delete_task_id', '');
-    var path = "/task/delete_selected/" + taskId;
+  function deleteTask(currentTaskBtn) {
+    let taskId = currentTaskBtn.currentTarget.id.replace('delete_task_id:', '');
+    let path = "/task/delete_selected/" + taskId;
 
     $.ajax({
       url: path,
@@ -71,13 +71,11 @@ jQuery(document).ready(function () {
 
   function destroySelected(checkboxes_class) {
     var path = "/task/delete_selected/";
-    var items = $(checkboxes_class);
+    var checkedTask = $(checkboxes_class + ":checked");
     var notice = $('#notice');
 
-    for (let i = 0; i < items.length; i++) {
-      if (items[i].checked) {
-        path += items[i].id + "&";
-      }
+    for (let i = 0; i < checkedTask.length; i++) {
+      path += checkedTask[i].id + "&";
     }
 
     notice.html("Wait");
@@ -89,12 +87,10 @@ jQuery(document).ready(function () {
       url: path,
       type: 'DELETE',
       success: function () {
-        for (let i = 0; i < items.length; i++) {
-          if (items[i].checked) {
-            let id = items[i].id;
-            $(".dropdown" + id).remove();
-            clearInterval(w);
-          }
+        for (let i = 0; i < checkedTask.length; i++) {
+          let id = checkedTask[i].id;
+          $(".dropdown" + id).remove();
+          clearInterval(w);
         }
         $('#notice').html("Selected tasks deleted.");
       },

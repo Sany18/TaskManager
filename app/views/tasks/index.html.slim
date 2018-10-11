@@ -33,7 +33,7 @@ div class="w3-half"
             = link_to "Show", task
           .w3-bar-item.w3-button.blacklink
             = link_to "Edit", edit_task_path(task)
-          .w3-bar-item.w3-button.blacklink.delete_current_task[id="delete_task_id#{task.id}"]
+          .w3-bar-item.w3-button.blacklink.delete_current_task[id="delete_task_id:#{task.id}"]
             | Delete
 div class="w3-half"
   .w3-teal.w3-padding
@@ -59,6 +59,6 @@ div class="w3-half"
             = link_to "Show", task
           .w3-bar-item.w3-button.blacklink
             = link_to "Edit", edit_task_path(task)
-          .w3-bar-item.w3-button.blacklink.delete_current_task[id="delete_task_id#{task.id}"]
+          .w3-bar-item.w3-button.blacklink.delete_current_task[id="delete_task_id:#{task.id}"]
             | Delete
 #new_task_div
