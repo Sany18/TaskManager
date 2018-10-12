@@ -12,7 +12,6 @@ class User::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    super
     build_resource(sign_up_params)
 
     resource.save
@@ -82,4 +81,8 @@ class User::RegistrationsController < Devise::RegistrationsController
   # def build_resource(hash = {})
   #   self.resource = resource_class.new_with_session(hash, session)
   # end
+
+  def build_resource(hash = {})
+    self.resource = resource_class.new_with_session(hash, session)
+  end
 end
