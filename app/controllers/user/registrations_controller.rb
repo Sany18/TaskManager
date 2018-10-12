@@ -12,6 +12,7 @@ class User::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
+    super
     build_resource(sign_up_params)
 
     resource.save
@@ -76,5 +77,9 @@ class User::RegistrationsController < Devise::RegistrationsController
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
+  # end
+  #
+  # def build_resource(hash = {})
+  #   self.resource = resource_class.new_with_session(hash, session)
   # end
 end
