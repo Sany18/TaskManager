@@ -1,4 +1,4 @@
-class Mario
+class RspecImage
   def initialize
     puts "
 ██████╗ ███████╗██████╗ ███████╗ ██████╗

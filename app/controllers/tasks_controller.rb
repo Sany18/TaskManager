@@ -73,11 +73,11 @@ class TasksController < ApplicationController
   #GET /task/status_switch/:id
   def status_switch
     id = params[:id]
-    task = Task.find_by(id: id)
-    if task.is_done == false
-      task.update(is_done: true)
+    @task = current_user.tasks.find_by(id: id)
+    if @task.is_done == false
+      @task.update(is_done: true)
     else
-      task.update(is_done: false)
+      @task.update(is_done: false)
     end
 
     respond_to do |format|

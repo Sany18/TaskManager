@@ -5,6 +5,8 @@ require 'devise'
 require 'simplecov'
 require 'factory_bot'
 require 'bot_helper'
+require 'controllers/user/lui'
+
 
 ENV['RAILS_ENV'] ||= 'test'
 
@@ -21,6 +23,7 @@ require File.expand_path('../../config/environment', __FILE__)
 
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
+RspecImage.new
 
 begin
   ActiveRecord::Migration.maintain_test_schema!
