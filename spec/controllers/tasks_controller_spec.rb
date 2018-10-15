@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe TasksController, type: :controller do
-  let!(:user) {@request.env["devise.mapping"] = Devise.mappings[:user]; create(:user)}
+  let(:user) {@request.env["devise.mapping"] = Devise.mappings[:user]; create(:user)}
   before(:each) do
     sign_in user
   end
@@ -75,7 +75,7 @@ RSpec.describe TasksController, type: :controller do
 
   # POST /task
   context "#create" do
-    let! (:current_task) { build(:task) }
+    let!(:current_task) { build(:task) }
     let!(:params) {{ task: current_task.attributes }}
     it "should return 200" do
       post :create, params: params
@@ -121,7 +121,7 @@ RSpec.describe TasksController, type: :controller do
 
     it "destroy task" do
       delete :destroy, params: params
-      expect( Task.find_by(id: task.id) ).to eq( nil )
+      expect( Task.find_by(id: task.id) ).to be_nil
     end
 
     it "status 302" do
@@ -139,8 +139,8 @@ RSpec.describe TasksController, type: :controller do
     it "destroy tasks" do
       puts params
       delete :destroy, params: params
-      expect( Task.find_by(id: task.id) ).to eq( nil )
-      expect( Task.find_by(id: task_2.id) ).to eq( nil )
+      expect( Task.find_by(id: task.id) ).to be_nil
+      expect( Task.find_by(id: task_2.id) ).to be_nil
     end
 
     it "status 204" do
