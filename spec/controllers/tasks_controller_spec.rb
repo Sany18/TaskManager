@@ -25,7 +25,8 @@ RSpec.describe TasksController, type: :controller do
 
   # GET /task/:id
   context "#show" do
-    let(:params) { task = create(:task); {id: task.id} }
+    let(:task) { create(:task, user_id: @user.id) }
+    let(:params) {{ id: task.id }}
     it "should show task" do
       get :show, params: params
       expect(response).to have_http_status(200)
@@ -46,7 +47,8 @@ RSpec.describe TasksController, type: :controller do
 
   # GET /task/1/edit
   context "#edit" do
-    let(:params) { task = create(:task); {id: task.id} }
+    let(:task) { create(:task, user_id: @user.id) }
+    let(:params) {{ id: task.id }}
     it "should direct to edit" do
       get :edit, params: params
       expect(response).to have_http_status(200)
@@ -70,7 +72,8 @@ RSpec.describe TasksController, type: :controller do
 
   # PATCH/PUT /task/:id
   context "#update" do
-    let(:params) { task = create(:task); {id: task.id, task: task.attributes} }
+    let(:task) { create(:task, user_id: @user.id) }
+    let(:params) {{ id: task.id, task: task.attributes }}
     it "should update task" do
       put :update, params: params
       expect(response).to have_http_status(302)
@@ -79,7 +82,8 @@ RSpec.describe TasksController, type: :controller do
 
   # DELETE /task/:id
   context "#destroy" do
-    let(:params) { task = create(:task); {id: task.id} }
+    let(:task) { create(:task, user_id: @user.id) }
+    let(:params) {{ id: task.id }}
     it "should destroy task" do
       delete :destroy, params: params
       expect(response).to have_http_status(302)
@@ -88,16 +92,18 @@ RSpec.describe TasksController, type: :controller do
 
   # DELETE /task/delete_selected/:id
   context "#destroy selected" do
-    let(:params) { task = create(:task); {id: task.id} }
+    let(:task) { create(:task, user_id: @user.id) }
+    let(:params) {{ id: task.id }}
     it "should delete selected task" do
       delete :destroy_selected, params: params
-      expect(response).to have_http_status(302)
+      expect(response).to have_http_status(204)
     end
   end
 
   #GET /task/status_switch/:id
   context "#status_switch" do
-    let(:params) { task = create(:task); {id: task.id} }
+    let(:task) { create(:task, user_id: @user.id) }
+    let(:params) {{ id: task.id }}
     it "should change status" do
       get :status_switch, params: params
       expect(response).to have_http_status(302)

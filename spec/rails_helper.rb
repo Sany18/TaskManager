@@ -1,9 +1,11 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
+
 require 'spec_helper'
-require 'simplecov'
 require 'devise'
+require 'simplecov'
 require 'factory_bot'
 require 'bot_helper'
+
 ENV['RAILS_ENV'] ||= 'test'
 
 SimpleCov.start "rails" do
