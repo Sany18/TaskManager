@@ -72,11 +72,7 @@ class TasksController < ApplicationController
   def status_switch
     id = params[:id]
     @task = current_user.tasks.find_by(id: id)
-    if @task.is_done == false
-      @task.update(is_done: true)
-    else
-      @task.update(is_done: false)
-    end
+    @task.update(is_done: !@task.is_done)
 
     respond_to do |format|
       format.html {redirect_to "/", notice: "Changed."}
