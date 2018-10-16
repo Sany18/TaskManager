@@ -1,106 +1,131 @@
 require 'rails_helper'
-require 'controllers/user/lui'
 
 RSpec.describe TasksController, type: :controller do
+  let(:user) { @request.env["devise.mapping"] = Devise.mappings[:user]; create(:user) }
   before(:each) do
-    @request.env["devise.mapping"] = Devise.mappings[:user]
-    @user = create(:user)
-    sign_in @user
+    sign_in user
   end
 
   # GET /tasks
   context "#index" do
-    it "should ret. 200 if user is up" do
-      Mario.new
-      get :index
-      expect(response).to have_http_status(200)
-    end
+    let!(:user_task) { create(:task, user_id: user.id) }
+    let!(:not_user_task) { create(:task, user_id: 0) }
 
     it "should redirect if user is down" do
-      sign_out @user
+      sign_out user
       get :index
-      expect(response).to have_http_status(302)
+      expect(response).to redirect_to(new_user_session_path)
     end
+
+    before do
+      get :index
+    end
+
+    it { expect(assigns(:tasks).last).to eq(user_task) }
+    it { expect(assigns(:tasks).first).to eq(user_task) }
+    it { expect(assigns(:tasks).last).not_to eq(not_user_task) }
+    it { expect(response).to have_http_status(200) }
   end
 
   # GET /task/:id
   context "#show" do
-    let(:params) { task = create(:task); {id: task.id} }
-    it "should show task" do
-      get :show, params: params
-      expect(response).to have_http_status(200)
+    let(:task) {create(:task, user_id: user.id)}
+
+    before do
+      get :show, params: {id: task.id}
     end
+
+    it {expect(assigns(:task)).to eq(task)}
+    it {expect(response).to have_http_status(200)}
   end
 
   # GET /task/new
   context "#new" do
-    it "should get new task" do
+    before do
       get :new
-      expect(response).to have_http_status(200)
     end
-    it "should have new Task" do
-      get :new
-      expect(assigns(:task)).to be_a_new(Task)
-    end
+
+    it { expect(response).to have_http_status(200) }
+    it { expect(assigns(:task)).to be_a_new(Task) }
   end
 
   # GET /task/1/edit
   context "#edit" do
-    let(:params) { task = create(:task); {id: task.id} }
-    it "should direct to edit" do
-      get :edit, params: params
-      expect(response).to have_http_status(200)
+    let(:task) {create(:task, user_id: user.id)}
+
+    before do
+      get :edit, params: {id: task.id}
     end
+
+    it {expect(assigns(:task)).to eq(task)}
+    it {expect(response).to have_http_status(200)}
   end
 
   # POST /task
   context "#create" do
-    let(:params) { {task: build(:task).attributes} }
-    it "should create task" do
-      # sign_in FactoryBot.create(:user)
+    let(:current_task) {build(:task)}
+    let(:params) {{task: current_task.attributes}}
+
+    before do
       post :create, params: params
-      expect(response).to have_http_status(302)
     end
 
-    it "should have new Task" do
-      get :new
-      expect(assigns(:task)).to be_a_new(Task)
-    end
+    it { expect(response).to redirect_to(root_path) }
+    it { expect(assigns(:task).title).to eq(current_task.title) }
+    it { expect(assigns(:task).theme).to eq(current_task.theme) }
   end
 
   # PATCH/PUT /task/:id
   context "#update" do
-    let(:params) { task = create(:task); {id: task.id, task: task.attributes} }
-    it "should update task" do
+    let(:task_1) {create(:task, user_id: user.id)}
+    let(:task_2) {build(:task, user_id: user.id)}
+    let(:params) {{id: task_1.id, task: task_2.attributes}}
+
+    before do
       put :update, params: params
-      expect(response).to have_http_status(302)
     end
+
+    it { expect(response).to redirect_to(root_path) }
+    it { expect(assigns(:task).title).to eq(task_2.title) }
+    it { expect(assigns(:task).theme).to eq(task_2.theme) }
   end
 
   # DELETE /task/:id
   context "#destroy" do
-    let(:params) { task = create(:task); {id: task.id} }
-    it "should destroy task" do
-      delete :destroy, params: params
-      expect(response).to have_http_status(302)
+    let(:task) {create(:task, user_id: user.id)}
+
+    before do
+      delete :destroy, params: {id: task.id}
     end
+
+    it { expect(Task.find_by(id: task.id)).to be_nil }
+    it { expect(response).to have_http_status(302) }
   end
 
   # DELETE /task/delete_selected/:id
   context "#destroy selected" do
-    let(:params) { task = create(:task); {id: task.id} }
-    it "should delete selected task" do
+    let(:task) {create(:task, user_id: user.id)}
+    let(:task_2) {create(:task, user_id: user.id)}
+    let(:params) {{id: [task.id, task_2.id] * '&'}}
+
+    before do
       delete :destroy_selected, params: params
-      expect(response).to have_http_status(302)
     end
+
+    it { expect(Task.find_by(id: task.id)).to be_nil }
+    it { expect(Task.find_by(id: task_2.id)).to be_nil }
+    it { expect(response).to have_http_status(204) }
   end
 
   #GET /task/status_switch/:id
   context "#status_switch" do
-    let(:params) { task = create(:task); {id: task.id} }
-    it "should change status" do
-      get :status_switch, params: params
-      expect(response).to have_http_status(302)
+    let(:task) {create(:task, user_id: user.id)}
+
+    before do
+      get :status_switch, params: {id: task.id}
     end
+
+    it { expect(assigns(:task).is_done).not_to eq(task.is_done) }
+    it { expect(response).to have_http_status(302) }
   end
 end

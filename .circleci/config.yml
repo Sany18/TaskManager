@@ -30,7 +30,6 @@ jobs:
         name: install dependencies
         command: |
           bundle install --jobs=4 --retry=3 --path vendor/bundle
-
     - run: sudo apt install -y postgresql-client || true
 
     - save_cache:
@@ -48,9 +47,7 @@ jobs:
         command: |
           mkdir /tmp/test-results
           TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
-
           bundle exec rspec
-
     # collect reports
     # heh
     - store_test_results:

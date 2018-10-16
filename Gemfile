@@ -26,6 +26,7 @@ group :development, :test do
   gem 'simplecov', require: false
   gem 'rails-controller-testing'
   gem 'shoulda-matchers'
+  gem 'pry'
 end
 
 group :development do

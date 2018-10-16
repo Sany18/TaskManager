@@ -9,7 +9,6 @@ FactoryBot.define do
   end
 
   factory :task do
-    id {Faker::Number.number(5)}
     title {Faker::Job.title}
     theme {Faker::Hacker.say_something_smart}
     priority {rand(0..5)}

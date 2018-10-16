@@ -65,20 +65,13 @@ class TasksController < ApplicationController
 
   # DELETE /task/delete_selected/:id
   def destroy_selected
-    params[:id].split("&").map do |id|
-      current_user.tasks.find_by(id: id).destroy
-    end
+    current_user.tasks.where(id: params[:id].split("&")).destroy_all
   end
 
   #GET /task/status_switch/:id
   def status_switch
-    id = params[:id]
-    task = Task.find_by(id: id)
-    if task.is_done == false
-      task.update(is_done: true)
-    else
-      task.update(is_done: false)
-    end
+    @task = current_user.tasks.find_by(id: params[:id])
+    @task.update(is_done: !@task.is_done)
 
     respond_to do |format|
       format.html {redirect_to "/", notice: "Changed."}
