@@ -137,8 +137,7 @@ RSpec.describe TasksController, type: :controller do
     let!(:params) {{ id: [task.id, task_2.id] * '&' }}
 
     it "destroy tasks" do
-      puts params
-      delete :destroy, params: params
+      delete :destroy_selected, params: params
       expect( Task.find_by(id: task.id) ).to be_nil
       expect( Task.find_by(id: task_2.id) ).to be_nil
     end

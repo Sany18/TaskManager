@@ -65,8 +65,7 @@ class TasksController < ApplicationController
 
   # DELETE /task/delete_selected/:id
   def destroy_selected
-    ids = params[:id].split("&")
-    current_user.tasks.where(id: ids).destroy
+    current_user.tasks.where(id: params[:id].split("&")).destroy_all
   end
 
   #GET /task/status_switch/:id
